@@ -1,0 +1,10 @@
+services:
+  mazhai-db:
+    image: timescale/timescaledb:latest-pg16
+    container_name: mazhai-db
+    environment:
+      POSTGRES_DB: mazhai_central
+      POSTGRES_USER: mazhai_admin
+      POSTGRES_PASSWORD: "AranSecure2026!"
+    ports:
+      - "5432:5432"

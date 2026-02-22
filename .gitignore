@@ -1,0 +1,9 @@
+**/target/
+*.class
+*.log
+.DS_Store
+.idea/
+.vscode/
+*.iml
+
+mazhai-central/src/main/java/in/

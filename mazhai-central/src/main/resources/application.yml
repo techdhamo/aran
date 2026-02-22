@@ -1,6 +1,18 @@
 spring:
   application:
-    name: mazhai-central
+    name: org.mazhai.central
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mazhai_central
+    username: mazhai_admin
+    password: "AranSecure2026!"
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
   threads:
     virtual:
       enabled: true
+
+server:
+  port: 33100

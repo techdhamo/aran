@@ -1,6 +1,0 @@
-spring:
-  application:
-    name: mazhai-central
-  threads:
-    virtual:
-      enabled: true

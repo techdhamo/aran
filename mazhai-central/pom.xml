@@ -13,8 +13,8 @@
     <groupId>org.mazhai</groupId>
     <artifactId>mazhai-central</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>mazhai-central</name>
-    <description>Mazhai Central - Telemetry ingestion backend for Aran Code-to-Cloud Security Suite</description>
+    <name>mazhai.org - mazhai-central</name>
+    <description>Mazhai Central (mazhai.org) - Telemetry ingestion backend for Aran (aran.mazhai.org)</description>
 
     <properties>
         <java.version>21</java.version>
@@ -55,6 +55,16 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <excludes>
+                        <exclude>in/**</exclude>
+                        <exclude>org/mazhai/central/api/**</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
