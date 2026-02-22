@@ -1,0 +1,5 @@
+org/mazhai/central/MazhaiCentralApplication.class
+org/mazhai/central/api/v1/telemetry/TelemetryPayload$RuntimeState.class
+org/mazhai/central/api/v1/telemetry/TelemetryPayload.class
+org/mazhai/central/api/v1/telemetry/TelemetryIngestionController.class
+org/mazhai/central/api/v1/telemetry/TelemetryPayload$EnvironmentState.class
