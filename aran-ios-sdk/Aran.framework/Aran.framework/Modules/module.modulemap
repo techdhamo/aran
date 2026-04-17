@@ -1,0 +1,4 @@
+framework module Aran {
+  header "Aran-Swift.h"
+  requires objc
+}

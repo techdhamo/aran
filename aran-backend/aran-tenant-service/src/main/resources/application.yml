@@ -1,0 +1,17 @@
+server:
+  port: 8082
+
+spring:
+  application:
+    name: aran-tenant-service
+  threads:
+    virtual:
+      enabled: true
+  datasource:
+    url: jdbc:postgresql://postgres:5432/aran_cloud
+    username: ${POSTGRES_USER:aran}
+    password: ${POSTGRES_PASSWORD:aran123}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false

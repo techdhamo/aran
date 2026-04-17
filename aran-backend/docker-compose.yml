@@ -1,0 +1,118 @@
+version: '3.9'
+
+services:
+  postgres:
+    image: postgres:16
+    container_name: aran-postgres
+    environment:
+      POSTGRES_DB: aran_cloud
+      POSTGRES_USER: aran
+      POSTGRES_PASSWORD: aran123
+    # Internal only - not exposed
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.2-alpine
+    container_name: aran-redis
+    # Internal only - not exposed
+
+  aran-iam-service:
+    build:
+      context: .
+      dockerfile: ./aran-iam-service/Dockerfile
+    container_name: aran-iam-service
+    environment:
+      ARAN_JWT_SECRET: "aran-super-secure-jwt-key-please-change-in-production-256bits-minimum"
+    # Internal only - not exposed
+    depends_on:
+      - redis
+
+  aran-tenant-service:
+    build:
+      context: .
+      dockerfile: ./aran-tenant-service/Dockerfile
+    container_name: aran-tenant-service
+    environment:
+      POSTGRES_USER: aran
+      POSTGRES_PASSWORD: aran123
+    # Internal only - not exposed
+    depends_on:
+      - postgres
+
+  aran-telemetry-service:
+    build:
+      context: .
+      dockerfile: ./aran-telemetry-service/Dockerfile
+    container_name: aran-telemetry-service
+    environment:
+      ARAN_RSA_PRIVATE_KEY_B64: "MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDyGysHfOMC31+ilERCb+mpWM+xJqzestyGJlwvHlZour3IpipJtiEQCMVBsk46DRcUgwBBDB8OYN6h20VEryqagJlfmRXrefT22FCXZle5AxFmJeNUfnCHZn079tUsdIFKXdkMoKGl7YUBdlquHCs9pHd+6tpRx4CevvSfNWG8/pwekv3Rf4qTGSC2+imEzEt0Nzi8tMGlc/gpOffYXq37eEIuifL3HLVbuyoa2623fzzLKy7zPUo+HrCeEeifx9vTWbDLd0/6hf4WVejGS6Yx8AztpoO8yWyvMH+qokn61/Ps5czXrmWxUKA3peLvUcvj9chVxxe89xQj9qdTjqTE5AgMBAAECggEAA7Wu7oJ5njSqQ8JQxAhlSZyIcUt/q3pzZsTp1FynVu2xPLM4TlD3q+7NqGkMhMidiCHta8LOVJ3dR/JaCG4ss9pjU4nCZDqEF0zC9A+HNbA0V4totsFMJGqDp9plP3Ll96ueTzaJ2WKUN+ri4o9CFZ0YGrzjgkiDlRT7lCptUQu9fV2e5C7caXxCbtqgTViyWWly21/gJCzFUwGO6G/Dptr9RBQji9Q6qDtF52vYEqNUquWnyfghbdYExIEqoG6xCg2+68WUETbcml3qdVcxzA2MiiuS/1QR3HVnbw7J2mNTt27Rh06y9GdtDdJ8I/ynTtJEeiH6OnG18JE/jiTPAQKBgQDodaxjuN5JG/apcVJHdNHF1akJKwzx4GFsTyuxmEG5661P9eiVaZe8fDFSZ6RnlqeK1oPI0VJfGSl7LrBtnN/xl5SIQ6DA9xwvk7+wtGMHOMNRfZsqoDoHqitrPe7POakvLY/hi0+AdKYKsk+NVlLb6F+KyH2ZEDBo2J1ZM5lA2QKBgQDa7Ech25vIOwc5jNcm76eDNNaYwOLjRtWoTQERojqnTYR9YwWwOMp1uFErX3KrVuK5sue7IqYY/qOenqVHSiN5JY8/HLZPSr44PDranUo1CnN9+I7Wl8RfQo2+U1uylqoD/ElG9AWgtIRttUTR37ZYOIlfqqcVaNTOjkxM7VE3YQKBgQCMt277jtVAfGT8fVTJXLX/hC8nFaBoauOOpP5WK0zeNwRa+wkoKRtpReS1dXfYHSKesOxljBDI8HpjzweN0wDdRlzrf8S4Ct5NDqtjVE79+CaEFfzv+L4oFaLi8EK3vrfjjzkh1yrxH6vDndz6Od8+r5PmdydQmLQ1Q6s8bDfBQQKBgDyyKX6Pnn9DLlucWsJmy3CrI5wyTjVpHC+POe6jpdNgwIzq+VbESA2fTpHR4r7yVeXaXjkaACcJ4l9F6Nj9Cxy5dx+uXDVbqaV5vW+DEGHoReD1GtUQOteWYioUfmXjM7vrJH3RhgXqRpUMHsp5VdrbweqOK8jZybaC6VCis1PBAoGBAIPHVeTAOHHRhbnZiBw6ZgG/xqAQpfE49EKCni+hckxvVG5uwb3ZZv+vXQ6TDHfoppuY2KrroLCm4wCiDQR4jBa3CBQU3s0hKk8UPIaGR8vbwk4HhvWYZSbp8uveSbAFLvzNUD/KNug45hAHFTPRpdQxowrY3+hoQg9/XwlX/KPP"
+    # Internal only - not exposed
+
+  aran-api-gateway:
+    build:
+      context: .
+      dockerfile: ./aran-api-gateway/Dockerfile
+    container_name: aran-api-gateway
+    environment:
+      ARAN_SIGIL_EC_PUBLIC_KEY_B64: "MFkwEwYHKoZIzj0CAQYIKoZIzj0DAQcDQgAEAVRVEsiUuQdbZRkuhEFFL6UvEknUIQJ2PhOp6d7wVIGixg4aiUrzZVoVVhHpP2NFSH8YH5G4eLKKUsLVnq6TcA=="
+    # Internal only - not exposed
+    depends_on:
+      - aran-iam-service
+      - aran-tenant-service
+      - aran-telemetry-service
+
+  # ── Aran WAF: Envoy edge layer ──────────────────────────────────────────────
+  # Handles all external traffic. Performs native ES256 JWT verification via
+  # jwt_authn filter, polls JWKS from aran-iam-service every 300s.
+  # Valid requests get X-Aran-Claims + X-Aran-Rasp-Mask injected, then
+  # proxied to aran-api-gateway for RASP policy routing.
+  aran-waf:
+    image: envoyproxy/envoy:v1.29-latest
+    container_name: aran-waf
+    volumes:
+      - ./aran-waf/envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+    ports:
+      - "11004:8443"   # External API entry point — replaces direct :8080 access
+    depends_on:
+      - aran-api-gateway
+      - aran-iam-service
+    command: ["envoy", "-c", "/etc/envoy/envoy.yaml", "--log-level", "info"]
+
+  # ── Cloudflared: Subdomain mapping via Cloudflare Tunnel ─────────────────────
+  # Maps aran.mazhai.org subdomains to internal services:
+  #   aran.mazhai.org -> official website (nginx)
+  #   api.aran.mazhai.org -> aran-waf (11004)
+  #   iam.aran.mazhai.org -> aran-iam-service (11000)
+  #   tenant.aran.mazhai.org -> aran-tenant-service (11001)
+  #   telemetry.aran.mazhai.org -> aran-telemetry-service (11002)
+  #   gateway.aran.mazhai.org -> aran-api-gateway (11003)
+  cloudflared:
+    image: cloudflare/cloudflared:latest
+    container_name: aran-cloudflared
+    volumes:
+      - ./cloudflared/config.yaml:/etc/cloudflared/config.yaml:ro
+      - ./cloudflared/d406a73a-bf0b-45a7-82a5-083e8db73564.json:/etc/cloudflared/d406a73a-bf0b-45a7-82a5-083e8db73564.json:ro
+    command: ["tunnel", "--config", "/etc/cloudflared/config.yaml", "run"]
+    depends_on:
+      - aran-waf
+      - aran-iam-service
+      - aran-tenant-service
+      - aran-telemetry-service
+      - aran-api-gateway
+      - official-website
+    networks:
+      - default
+
+  # ── Official Website: Nginx serving static content ─────────────────────────────
+  official-website:
+    image: nginx:alpine
+    container_name: aran-website
+    volumes:
+      - ../aran-website:/usr/share/nginx/html:ro
+      - ../aran-website/nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - "11007:80"
+
+volumes:
+  postgres_data:

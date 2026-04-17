@@ -1,0 +1,82 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: aran-api-gateway
+  cloud:
+    gateway:
+      # Default filters applied to every route unless overridden
+      default-filters:
+        - AddResponseHeader=X-Aran-Gateway, true
+        - RemoveRequestHeader=X-Aran-Claims      # Strip internal header before it leaves SCG
+
+      routes:
+        # ── Unauthenticated / bypass routes ─────────────────────────────────
+        - id: iam-auth-routes
+          uri: http://aran-iam-service:8081
+          predicates:
+            - Path=/api/v1/auth/**
+          # No RASP filter — auth flow happens before Sigil is available
+
+        - id: telemetry-routes
+          uri: http://aran-telemetry-service:8083
+          predicates:
+            - Path=/api/v1/telemetry/**
+          # No RASP filter — telemetry posts arrive independently of Sigil
+
+        # ── Step-up authentication flow ──────────────────────────────────────
+        # Dirty-mask UI threats (screen recording, overlay) redirect here.
+        # step-up service enforces biometric re-authentication.
+        - id: step-up-routes
+          uri: http://aran-iam-service:8081
+          predicates:
+            - Path=/step-up/**
+          filters:
+            - RewritePath=/step-up/(?<segment>.*), /api/v1/auth/step-up/${segment}
+
+        # ── Sandbox routes (read-only, network-risk devices) ─────────────────
+        # RaspPolicyRoutingFilter rewrites the path to /sandbox<original>
+        # for requests where only network-level threats are detected.
+        # Sandbox service returns read-only responses and flags the session.
+        - id: sandbox-tenant-routes
+          uri: http://aran-tenant-service:8082
+          predicates:
+            - Path=/sandbox/api/v1/tenant/**
+          filters:
+            - RewritePath=/sandbox(?<segment>.*), ${segment}
+            - AddRequestHeader=X-Aran-Sandbox, true
+
+        - id: sandbox-admin-routes
+          uri: http://aran-tenant-service:8082
+          predicates:
+            - Path=/sandbox/api/v1/admin/**
+          filters:
+            - RewritePath=/sandbox(?<segment>.*), ${segment}
+            - AddRequestHeader=X-Aran-Sandbox, true
+
+        # ── Protected banking routes (Sigil verified by Envoy upstream) ───────
+        # RaspPolicyRoutingFilter is a GlobalFilter — it applies here automatically.
+        # Clean mask (0) → routes proceed. Dirty mask → see filter policy above.
+        - id: tenant-admin-routes
+          uri: http://aran-tenant-service:8082
+          predicates:
+            - Path=/api/v1/admin/**
+
+        - id: tenant-portal-routes
+          uri: http://aran-tenant-service:8082
+          predicates:
+            - Path=/api/v1/tenant/**
+
+# ── Sigil EC public key (for SigilParser if used directly) ──────────────────
+# Envoy uses the same key served via JWKS. This is the fallback for local
+# development without Envoy in the path.
+aran:
+  sigil:
+    ec-public-key-b64: ${ARAN_SIGIL_EC_PUBLIC_KEY_B64:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

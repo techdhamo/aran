@@ -1,0 +1,140 @@
+// ============================================
+// UNIVERSAL iOS RASP - Symbol Stripping Configuration
+// BLACKBOX ARCHITECTURE - Static XCFramework
+// ============================================
+
+// Strip local symbols to hide from Ghidra
+STRIP_INSTALLED_PRODUCT = YES
+
+// Strip style: non-global keeps local symbols but removes global symbols
+// This is ideal for RASP as it hides the interface from static analysis
+STRIP_STYLE = non-global
+
+// Strip debug symbols to prevent reverse engineering
+COPY_PHASE_STRIP = YES
+
+// Strip all symbols (including local)
+DEAD_CODE_STRIPPING = YES
+
+// Remove unused code
+GCC_OPTIMIZATION_LEVEL = s
+SWIFT_OPTIMIZATION_LEVEL = -Osize
+
+// Enable bitcode (disabled for manual obfuscation preservation)
+// BITCODE_GENERATION_MODE = bitcode
+// ENABLE_BITCODE = NO  // Disable for manual obfuscation
+
+// Symbol renaming script (pre-build)
+// This script renames internal C++ functions to random strings
+// Run this before compilation to maximize obfuscation
+// Example: rename_symbols.py --input universal_rasp_core.cpp --output universal_rasp_core_obfuscated.cpp
+
+// ============================================
+// SYMBOL RENAMING SCRIPT (Python)
+// ============================================
+
+"""
+import re
+import random
+
+def rename_symbols(input_file, output_file):
+    with open(input_file, 'r') as f:
+        content = f.read()
+    
+    # Find all function definitions
+    pattern = r'(\b(?:static|__attribute__|__attribute__|extern|inline)\s+)*\w+\s+(\w+)\s*\('
+    
+    # Generate random names
+    function_map = {}
+    for match in re.finditer(pattern, content):
+        func_name = match.group(2)
+        if func_name not in function_map and not func_name.startswith('_'):
+            random_name = f'_{random.randint(0x1000, 0xFFFF):04x}'
+            function_map[func_name] = random_name
+    
+    # Replace function names
+    for old_name, new_name in function_map.items():
+        content = re.sub(r'\b' + old_name + r'\b', new_name, content)
+    
+    with open(output_file, 'w') as f:
+        f.write(content)
+    
+    print(f"Renamed {len(function_map)} functions")
+
+# Usage:
+# python3 rename_symbols.py universal_rasp_core.cpp universal_rasp_core_obfuscated.cpp
+"""
+
+// ============================================
+// POST-BUILD STRIPPING COMMANDS
+// ============================================
+
+// Additional stripping commands to run after build
+// Add these to your build phase script:
+
+/*
+#!/bin/bash
+
+# Strip all symbols from the binary
+strip -S -x "${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}"
+
+# Or use Xcode's built-in stripping
+# This is automatically handled by STRIP_INSTALLED_PRODUCT = YES
+
+# Remove debug information
+dsymutil "${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}" -o "${BUILT_PRODUCTS_DIR}/${EXECUTABLE_NAME}.dSYM"
+*/
+
+// ============================================
+// LINKER FLAGS FOR SYMBOL HIDING
+// ============================================
+
+// Hide all symbols by default (export only what's explicitly marked)
+OTHER_LDFLAGS = -Wl,-x -Wl,-dead_strip -Wl,-exported_symbols_list,$(PROJECT_DIR)/ExportedSymbols.txt
+
+// Or use -Xlinker -x to strip local symbols
+// OTHER_LDFLAGS = -Xlinker -x
+
+// ============================================
+// EXPORTED SYMBOLS LIST
+// ============================================
+
+// Create ExportedSymbols.txt with only the symbols you want to export:
+/*
+# Exported Symbols List
+# Only these symbols will be visible in the final binary
+
+# Swift symbols (if needed for Swift runtime)
+_swift_
+_$s
+
+# React Native symbols (if using React Native)
+RCT_EXPORT_METHOD
+RCT_EXPORT_MODULE
+
+# Flutter symbols (if using Flutter)
+Flutter
+
+# RASP public interface (if you want to expose it)
+RASPCore_invokeAudit
+RASPCore_getStatus
+*/
+
+// ============================================
+// ADDITIONAL SECURITY SETTINGS
+// ============================================
+
+// Enable address space layout randomization
+ENABLE_ADDRESS_SANITIZER = NO
+
+// Enable stack protection
+ENABLE_STRICT_OBJC_MSGSEND = YES
+ENABLE_TESTABILITY = NO
+
+// Disable code signing entitlements for release
+CODE_SIGN_ENTITLEMENTS =
+
+// Enable hardening
+GCC_ENABLE_PASCAL_STRINGS = NO
+GCC_NO_COMMON_BLOCKS = YES
+GCC_INLINES_ARE_PRIVATE_EXTERN = YES

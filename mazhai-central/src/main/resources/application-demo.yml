@@ -1,0 +1,34 @@
+# Mazhai Central - Demo Configuration
+# 
+# This profile enables the demo business API endpoints for testing
+# AranSentinel WAF with the mobile demo app.
+#
+# Usage: ./mvnw spring-boot:run -Dspring-boot.run.profiles=demo
+
+server:
+  port: 33100
+
+spring:
+  application:
+    name: mazhai-central
+
+# Enable demo business API endpoints
+aran:
+  demo:
+    enabled: true  # Enables DemoBusinessApiController
+  
+  # AranSentinel WAF Configuration
+  sentinel:
+    waf:
+      block-rooted: true
+      block-hooked: true
+      block-emulator: false  # Allow emulators for testing
+      block-tampered: true
+      block-frida: true
+      block-debugger: false  # Allow debuggers for development
+
+logging:
+  level:
+    org.mazhai.central.waf: DEBUG
+    org.mazhai.central.demo: INFO
+    org.mazhai.central.api: INFO

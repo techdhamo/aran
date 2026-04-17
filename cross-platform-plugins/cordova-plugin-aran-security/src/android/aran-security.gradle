@@ -1,0 +1,54 @@
+repositories {
+    google()
+    mavenCentral()
+    
+    // Option 1: Maven repository (recommended for production)
+    maven {
+        url "https://maven.aran.mazhai.org/releases"
+        // For private repository, add credentials:
+        // credentials {
+        //     username = project.findProperty("aranMavenUsername") ?: System.getenv("ARAN_MAVEN_USERNAME")
+        //     password = project.findProperty("aranMavenPassword") ?: System.getenv("ARAN_MAVEN_PASSWORD")
+        // }
+    }
+    
+    // Option 2: Local Maven repository
+    mavenLocal()
+}
+
+dependencies {
+    // Aran Security SDK - AAR from repository
+    // Option 1: From Maven repository (production)
+    implementation "org.mazhai.aran:aran-android-sdk:1.0.0"
+    
+    // Option 2: From local libs folder (development)
+    // Uncomment the line below and comment out the line above to use local AAR
+    // implementation(name: 'aran-android-sdk-1.0.0', ext: 'aar')
+    
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:1.9.0"
+    
+    // Coroutines
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:1.7.3"
+    
+    // JSON
+    implementation "org.json:json:20230227"
+    
+    // OkHttp (for SSL pinning)
+    implementation "com.squareup.okhttp3:okhttp:4.11.0"
+}
+
+// For local AAR files, add this configuration
+// android.libraryVariants.all { variant ->
+//     variant.getCompileConfiguration().getDependencies().each { dependency ->
+//         if (dependency.name == 'aran-android-sdk-1.0.0') {
+//             variant.getCompileConfiguration().files.add(file("libs/aran-android-sdk-1.0.0.aar"))
+//         }
+//     }
+// }
+
+android {
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}

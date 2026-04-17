@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <Button
+        android:id="@+id/scanButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Scan Device" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="── Pentest Simulation ──"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/simulateFridaButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🧪 Simulate Frida Injection" />
+
+    <Button
+        android:id="@+id/simulateMalwareButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🧪 Simulate Malware Presence" />
+
+    <Button
+        android:id="@+id/simulateTamperButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="🧪 Simulate Tampered Signature" />
+
+    <Button
+        android:id="@+id/clearSimulationButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="✓ Clear Simulation" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="16dp">
+
+        <TextView
+            android:id="@+id/statusText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Status: (not scanned)"
+            android:fontFamily="monospace" />
+
+    </ScrollView>
+
+</LinearLayout>

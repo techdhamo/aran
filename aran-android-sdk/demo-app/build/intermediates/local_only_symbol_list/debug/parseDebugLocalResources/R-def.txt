@@ -1,0 +1,16 @@
+R_DEF: Internal format may change without notice
+local
+color black
+color purple_500
+color purple_700
+color teal_200
+color white
+id clearSimulationButton
+id scanButton
+id simulateFridaButton
+id simulateMalwareButton
+id simulateTamperButton
+id statusText
+layout activity_main
+string app_name
+style Theme.AranDemo

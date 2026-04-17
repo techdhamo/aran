@@ -1,0 +1,33 @@
+android {
+    compileSdkVersion 34
+    
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0.0"
+    }
+    
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+}
+
+repositories {
+    maven {
+        url 'https://maven.aran-security.com/releases'
+        credentials {
+            username System.getenv('ARAN_MAVEN_USERNAME')
+            password System.getenv('ARAN_MAVEN_PASSWORD')
+        }
+    }
+}
+
+dependencies {
+    // "Dumb" passthrough - the actual logic is in the AAR
+    // Made optional for demo testing without Maven credentials
+    // implementation 'com.aran.security:core:1.0.0@aar'
+}

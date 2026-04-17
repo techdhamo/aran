@@ -1,0 +1,2 @@
+ninja: Entering directory `/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/x86'
+ninja: no work to do.

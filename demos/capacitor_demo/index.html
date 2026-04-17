@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARAN RASP Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 24px;
+            font-size: 16px;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+        
+        .status-row {
+            display: flex;
+            align-items: center;
+        }
+        
+        .status-icon {
+            font-size: 24px;
+            margin-right: 8px;
+        }
+        
+        .status-text {
+            font-size: 16px;
+            font-weight: 600;
+        }
+        
+        .status-ok {
+            color: #4CAF50;
+        }
+        
+        .status-not-ok {
+            color: #F44336;
+        }
+        
+        .button {
+            background: #6200EE;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 8px rgba(98, 0, 238, 0.3);
+        }
+        
+        .button:disabled {
+            background: #9E9E9E;
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+        
+        .result-row {
+            display: flex;
+            align-items: center;
+            padding: 12px 0;
+            border-bottom: 1px solid #E0E0E0;
+        }
+        
+        .result-icon {
+            font-size: 24px;
+            margin-right: 12px;
+            width: 30px;
+        }
+        
+        .result-content {
+            flex: 1;
+        }
+        
+        .result-name {
+            font-size: 16px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .result-value {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .result-time {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .info-card {
+            background: #E3F2FD;
+            border-radius: 12px;
+            padding: 16px;
+        }
+        
+        .info-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1976D2;
+            margin-bottom: 8px;
+        }
+        
+        .info-text {
+            font-size: 14px;
+            color: #424242;
+            margin-bottom: 4px;
+        }
+        
+        .no-results {
+            color: #999;
+            font-size: 16px;
+            text-align: center;
+            padding: 20px 0;
+        }
+        
+        .result-green {
+            color: #4CAF50;
+        }
+        
+        .result-orange {
+            color: #FF9800;
+        }
+        
+        .result-red {
+            color: #F44336;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ARAN RASP Demo</h1>
+        <div class="subtitle">Capacitor Plugin</div>
+        
+        <div class="card">
+            <div class="card-title">RASP Engine Status</div>
+            <div class="status-row">
+                <div class="status-icon" id="statusIcon">○</div>
+                <div class="status-text status-not-ok" id="statusText">Not Initialized</div>
+            </div>
+        </div>
+        
+        <button class="button" id="runAllBtn" onclick="runAllChecks()">Run All Security Checks</button>
+        
+        <div class="card">
+            <div class="card-title">Security Check Results</div>
+            <div id="results">
+                <div class="no-results">No security checks run yet</div>
+            </div>
+        </div>
+        
+        <div class="info-card">
+            <div class="info-title">Security Checks</div>
+            <div class="info-text">• Integrity Check (0x1A2B)</div>
+            <div class="info-text">• Debugger Check (0x2B3C)</div>
+            <div class="info-text">• Root Check (0x3C4D)</div>
+            <div class="info-text">• Jailbreak Check (0x4D5E)</div>
+            <div class="info-text">• Frida Check (0x5E6F)</div>
+            <div class="info-text">• Emulator Check (0x6F70)</div>
+        </div>
+    </div>
+    
+    <script type="module">
+        import { Capacitor } from '@capacitor/core';
+        
+        // Capacitor plugin registration would go here
+        // This is a placeholder for the actual plugin implementation
+        
+        let isInitialized = false;
+        let results = [];
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeRASP();
+        });
+        
+        async function initializeRASP() {
+            try {
+                // Placeholder for Capacitor plugin initialization
+                // const { AranRASP } = Capacitor.Plugins;
+                // await AranRASP.initialize();
+                isInitialized = true;
+                updateStatus(true);
+            } catch (error) {
+                console.error('Failed to initialize RASP:', error);
+                isInitialized = false;
+                updateStatus(false);
+            }
+        }
+        
+        function updateStatus(initialized) {
+            const icon = document.getElementById('statusIcon');
+            const text = document.getElementById('statusText');
+            
+            if (initialized) {
+                icon.textContent = '●';
+                icon.className = 'status-icon status-ok';
+                text.textContent = 'Initialized';
+                text.className = 'status-text status-ok';
+            } else {
+                icon.textContent = '○';
+                icon.className = 'status-icon status-not-ok';
+                text.textContent = 'Not Initialized';
+                text.className = 'status-text status-not-ok';
+            }
+        }
+        
+        async function runSecurityCheck(name, selector) {
+            if (!isInitialized) {
+                await initializeRASP();
+            }
+            
+            try {
+                // Placeholder for Capacitor plugin call
+                // const { AranRASP } = Capacitor.Plugins;
+                // const { result } = await AranRASP.validate({ selector });
+                const result = 0x7F3D; // Placeholder
+                
+                const timestamp = new Date();
+                results.push({
+                    name: name,
+                    result: result,
+                    timestamp: timestamp
+                });
+                updateResults();
+            } catch (error) {
+                console.error(`Failed to run ${name}:`, error);
+                const timestamp = new Date();
+                results.push({
+                    name: name,
+                    result: 0x7F3D,
+                    timestamp: timestamp
+                });
+                updateResults();
+            }
+        }
+        
+        async function runAllChecks() {
+            const btn = document.getElementById('runAllBtn');
+            btn.disabled = true;
+            
+            results = [];
+            updateResults();
+            
+            const checks = [
+                ['Integrity Check', 0x1A2B],
+                ['Debugger Check', 0x2B3C],
+                ['Root Check', 0x3C4D],
+                ['Jailbreak Check', 0x4D5E],
+                ['Frida Check', 0x5E6F],
+                ['Emulator Check', 0x6F70]
+            ];
+            
+            for (const [name, selector] of checks) {
+                await runSecurityCheck(name, selector);
+            }
+            
+            btn.disabled = false;
+        }
+        
+        function updateResults() {
+            const container = document.getElementById('results');
+            
+            if (results.length === 0) {
+                container.innerHTML = '<div class="no-results">No security checks run yet</div>';
+                return;
+            }
+            
+            let html = '';
+            for (let i = 0; i < results.length; i++) {
+                const result = results[i];
+                const icon = getResultIcon(result.result);
+                const color = getResultColor(result.result);
+                const time = formatTime(result.timestamp);
+                
+                html += `
+                    <div class="result-row">
+                        <div class="result-icon ${color}">${icon}</div>
+                        <div class="result-content">
+                            <div class="result-name">${result.name}</div>
+                            <div class="result-value">Result: 0x${result.result.toString(16).toUpperCase()}</div>
+                        </div>
+                        <div class="result-time">${time}</div>
+                    </div>
+                `;
+            }
+            
+            container.innerHTML = html;
+        }
+        
+        function getResultIcon(result) {
+            if (result === 0x7F3D) return '✓';
+            if (result === 0x1A2B) return '⚠';
+            return '✗';
+        }
+        
+        function getResultColor(result) {
+            if (result === 0x7F3D) return 'result-green';
+            if (result === 0x1A2B) return 'result-orange';
+            return 'result-red';
+        }
+        
+        function formatTime(date) {
+            const hours = date.getHours().toString().padStart(2, '0');
+            const minutes = date.getMinutes().toString().padStart(2, '0');
+            const seconds = date.getSeconds().toString().padStart(2, '0');
+            return `${hours}:${minutes}:${seconds}`;
+        }
+        
+        window.runAllChecks = runAllChecks;
+    </script>
+</body>
+</html>

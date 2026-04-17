@@ -1,0 +1,23 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: aran-telemetry-service
+  threads:
+    virtual:
+      enabled: true
+  servlet:
+    multipart:
+      max-request-size: 5MB
+      max-file-size: 5MB
+
+aran:
+  telemetry:
+    rsa-private-key-b64: ${ARAN_RSA_PRIVATE_KEY_B64:}
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info

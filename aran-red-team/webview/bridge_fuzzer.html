@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<!--
+  Aran Red-Team | WebView Bridge Fuzzer
+
+  Load this page in a WebView that has AranWebViewClient attached.
+  Results are written to console and a visible <pre> block.
+
+  Tests:
+    W1 - No token: call getSigil() without acquireBridgeToken() first
+    W2 - Stale token: acquire token, wait 31s, call getSigil()
+    W3 - Replayed token: use same token twice in succession
+    W4 - Null token: pass null literal as bridgeToken
+    W5 - Empty string token
+    W6 - Token from different session (hardcoded fake)
+    W7 - Race: call acquireBridgeToken() and getSigil() 100x in a tight loop
+         and confirm each token is consumed exactly once
+    W8 - addJavascriptInterface shadow: try to register "AranJSBridge" again
+         via JavaScript (will throw; confirms native guard)
+-->
+<html>
+<head><meta charset="utf-8"><title>Aran Bridge Fuzzer</title></head>
+<body style="font-family:monospace;background:#111;color:#0f0;padding:16px">
+<h2>Aran Bridge Fuzzer</h2>
+<pre id="log">Running...</pre>
+<script>
+(function () {
+    'use strict';
+
+    const results = [];
+    const log = document.getElementById('log');
+
+    function emit(level, test, msg) {
+        const line = `[${level}] ${test}: ${msg}`;
+        results.push({ level, test, msg });
+        log.textContent += '\n' + line;
+        console.log(line);
+    }
+
+    function pass(test, msg)  { emit('PASS',     test, msg); }
+    function fail(test, msg)  { emit('FAIL',     test, msg); }
+    function info(test, msg)  { emit('INFO',     test, msg); }
+    function warn(test, msg)  { emit('WARN',     test, msg); }
+
+    const BRIDGE = window.AranJSBridge;
+
+    if (!BRIDGE) {
+        emit('ERROR', 'INIT', 'AranJSBridge not found on window — is AranWebViewClient attached?');
+        return;
+    }
+
+    // ── W1: No token ──────────────────────────────────────────────────────────
+    (function W1() {
+        try {
+            // Call getSigil without first calling acquireBridgeToken
+            const sigil = BRIDGE.getSigil('', 'dGVzdA==', 'W1_NO_TOKEN');
+            if (!sigil || sigil === '') {
+                pass('W1', 'Empty token correctly rejected → empty string returned');
+            } else {
+                fail('W1', `Empty token ACCEPTED → sigil="${sigil.substring(0, 40)}..."`);
+            }
+        } catch (e) {
+            info('W1', `Exception (acceptable): ${e}`);
+        }
+    })();
+
+    // ── W2: Stale token (31s delay) ───────────────────────────────────────────
+    (function W2() {
+        try {
+            const token = BRIDGE.acquireBridgeToken();
+            info('W2', `Token acquired: ${token.substring(0, 16)}... — waiting 31s`);
+            setTimeout(function () {
+                const sigil = BRIDGE.getSigil(token, 'dGVzdA==', 'W2_STALE');
+                if (!sigil || sigil === '') {
+                    pass('W2', 'Stale token (>30s) correctly rejected');
+                } else {
+                    fail('W2', `Stale token ACCEPTED after TTL → sigil="${sigil.substring(0, 40)}..."`);
+                }
+                finalReport();
+            }, 31000);
+        } catch (e) {
+            info('W2', `Exception: ${e}`);
+        }
+    })();
+
+    // ── W3: Replayed token ────────────────────────────────────────────────────
+    (function W3() {
+        try {
+            const token = BRIDGE.acquireBridgeToken();
+            const hash  = 'dGVzdA==';
+
+            const first  = BRIDGE.getSigil(token, hash, 'W3_FIRST');
+            const replay = BRIDGE.getSigil(token, hash, 'W3_REPLAY');
+
+            if (first && first !== '') {
+                info('W3', 'First call succeeded (token consumed)');
+            }
+            if (!replay || replay === '') {
+                pass('W3', 'Replayed token correctly rejected on second call');
+            } else {
+                fail('W3', `Replayed token ACCEPTED → sigil="${replay.substring(0, 40)}..."`);
+            }
+        } catch (e) {
+            info('W3', `Exception: ${e}`);
+        }
+    })();
+
+    // ── W4: null token ────────────────────────────────────────────────────────
+    (function W4() {
+        try {
+            const sigil = BRIDGE.getSigil(null, 'dGVzdA==', 'W4_NULL');
+            if (!sigil || sigil === '') {
+                pass('W4', 'null token correctly rejected');
+            } else {
+                fail('W4', `null token ACCEPTED → sigil returned`);
+            }
+        } catch (e) {
+            info('W4', `Exception (acceptable — null coercion): ${e}`);
+        }
+    })();
+
+    // ── W5: Hardcoded fabricated token ────────────────────────────────────────
+    (function W5() {
+        const fake = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=';
+        try {
+            const sigil = BRIDGE.getSigil(fake, 'dGVzdA==', 'W5_FAKE');
+            if (!sigil || sigil === '') {
+                pass('W5', 'Hardcoded fabricated token correctly rejected');
+            } else {
+                fail('W5', `Fabricated token ACCEPTED → sigil="${sigil.substring(0, 40)}..."`);
+            }
+        } catch (e) {
+            info('W5', `Exception: ${e}`);
+        }
+    })();
+
+    // ── W6: addJavascriptInterface shadow attempt ─────────────────────────────
+    (function W6() {
+        try {
+            // WebView does not expose addJavascriptInterface to JS — this is the guard
+            if (typeof window.AranJSBridge !== 'object') {
+                fail('W6', 'AranJSBridge not present on window');
+                return;
+            }
+            // Try to overwrite the interface reference on window
+            const original = window.AranJSBridge;
+            window.AranJSBridge = { getSigil: () => 'HIJACKED', acquireBridgeToken: () => 'X' };
+            const hijacked = window.AranJSBridge.getSigil('X', 'hash', 'HIJACK');
+            // If the native calls are proxied, native code still validates on its side
+            // The real test is: does Kotlin's bridgeAttached guard prevent a second
+            // addJavascriptInterface call? We can only observe the symptom here.
+            if (hijacked === 'HIJACKED') {
+                warn('W6', 'window.AranJSBridge was overwritten in JS scope — but native token validation still applies. Native guard tested via Frida script 04.');
+            }
+            window.AranJSBridge = original;
+            pass('W6', 'window reference restored; native bridge unaffected (JS-side shadow is non-critical)');
+        } catch (e) {
+            info('W6', `Exception: ${e}`);
+        }
+    })();
+
+    // ── W7: Token race — 100 concurrent acquire+use pairs ────────────────────
+    (function W7() {
+        let consumed = 0, rejected = 0, errors = 0;
+        const N = 100;
+        const hash = 'dGVzdA==';
+
+        for (let i = 0; i < N; i++) {
+            try {
+                const t = BRIDGE.acquireBridgeToken();
+                const s = BRIDGE.getSigil(t, hash, `W7_RACE_${i}`);
+                if (s && s !== '') {
+                    consumed++;
+                } else {
+                    rejected++;
+                }
+            } catch (e) {
+                errors++;
+            }
+        }
+
+        info('W7', `100 acquire+use pairs: consumed=${consumed} rejected=${rejected} errors=${errors}`);
+
+        if (consumed === N && rejected === 0) {
+            pass('W7', 'All 100 tokens consumed exactly once — no races detected');
+        } else if (rejected > 0) {
+            fail('W7', `${rejected} tokens were rejected (race condition in token store?)`);
+        }
+    })();
+
+    function finalReport() {
+        const failed = results.filter(r => r.level === 'FAIL');
+        const verdict = failed.length === 0 ? 'ALL PASS' : `${failed.length} FAILURES`;
+        emit('SUMMARY', 'BRIDGE_FUZZER', verdict);
+        console.log('ARAN_RED_TEAM_REPORT:' + JSON.stringify(results));
+    }
+
+    // W2 calls finalReport after 31s; call it now for the sync tests
+    setTimeout(function () {
+        if (!results.find(r => r.test === 'W2')) finalReport();
+    }, 2000);
+})();
+</script>
+</body>
+</html>

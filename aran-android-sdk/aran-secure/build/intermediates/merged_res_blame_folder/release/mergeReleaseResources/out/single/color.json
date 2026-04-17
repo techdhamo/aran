@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "org.mazhai.aran.aran-secure-release-9:/color/common_google_signin_btn_tint.xml",
+        "source": "org.mazhai.aran.aran-secure-play-services-base-18.5.0-2:/color/common_google_signin_btn_tint.xml"
+    },
+    {
+        "merged": "org.mazhai.aran.aran-secure-release-9:/color/common_google_signin_btn_text_dark.xml",
+        "source": "org.mazhai.aran.aran-secure-play-services-base-18.5.0-2:/color/common_google_signin_btn_text_dark.xml"
+    },
+    {
+        "merged": "org.mazhai.aran.aran-secure-release-9:/color/common_google_signin_btn_text_light.xml",
+        "source": "org.mazhai.aran.aran-secure-play-services-base-18.5.0-2:/color/common_google_signin_btn_text_light.xml"
+    }
+]

@@ -1,0 +1,28 @@
+name: flutter_aran_security
+description: Enterprise mobile security SDK for Flutter with hardware attestation and cloud-managed threat intelligence
+version: 1.0.0
+homepage: https://aran.mazhai.org
+repository: https://github.com/aran-security/flutter-aran-security
+
+environment:
+  sdk: '>=2.19.0 <4.0.0'
+  flutter: ">=3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  plugin_platform_interface: ^2.0.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: org.mazhai.aran.flutter
+        pluginClass: AranSecurityPlugin
+      ios:
+        pluginClass: AranSecurityPlugin

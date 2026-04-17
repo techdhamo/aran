@@ -1,0 +1,339 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:1:1-22:12
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:1:1-22:12
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:1:1-22:12
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:1:1-22:12
+MERGED from [:aran-secure] /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.android.material:material:1.12.0] /Users/dhamo/.gradle/caches/transforms-4/e42ec10dde01f7f9fa178136870b2d9c/transformed/material-1.12.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/dhamo/.gradle/caches/transforms-4/bf9053f5d225eb5071ec999a023bd120/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dhamo/.gradle/caches/transforms-4/686b6263f56a272a8f3ff2db476094d9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/dhamo/.gradle/caches/transforms-4/9f8421c645daa2f80d0bd3d657058c39/transformed/appcompat-1.7.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/aed27d271f612912e542c0bfe3d36832/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/55e659f4393aeff1307af9e9a4e6e556/transformed/viewpager2-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [com.google.android.gms:play-services-cronet:18.1.0] /Users/dhamo/.gradle/caches/transforms-4/b000422e289770a2aaf0c62f9674fcc6/transformed/play-services-cronet-18.1.0/AndroidManifest.xml:2:1-8:12
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dhamo/.gradle/caches/transforms-4/62f8902d1b2c4d0cd2eac2fafa0803b3/transformed/play-services-base-18.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dhamo/.gradle/caches/transforms-4/7dd15af6067b9c4c1bf105aa53e8990c/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:2:1-5:12
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dhamo/.gradle/caches/transforms-4/c6d995942d71b25857f917c50b6c6592/transformed/play-services-basement-18.4.0/AndroidManifest.xml:2:1-9:12
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/dhamo/.gradle/caches/transforms-4/37a2f8ebae98fa8b5331bb0c33c69077/transformed/fragment-1.5.4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.activity:activity:1.8.0] /Users/dhamo/.gradle/caches/transforms-4/9a5dc63cdadd45f56f4147b71bc9efc5/transformed/activity-1.8.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/564eabf43564284a0f5edcabb897efe9/transformed/drawerlayout-1.1.1/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/3671bf60b9403407a828369c333f347f/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.transition:transition:1.5.0] /Users/dhamo/.gradle/caches/transforms-4/cea29628ca9b17c62eaefbf47caf832e/transformed/transition-1.5.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/6bd3206b4826b90e870aa6e0426ecadb/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/4e1f2424bbee6995f71e6b9eb12aafe4/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/211da192ac8d1ad74e05deddd2a802a4/transformed/vectordrawable-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/5d002e17427ff74209333620e3244104/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/7a375e43c3ce23aecd50f223c90f57ed/transformed/loader-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/ff2c1bc7c9159b852a04bdd5e19dccb0/transformed/viewpager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/d0bb335a9db74147a1a5da8e1c465eb7/transformed/recyclerview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.customview:customview:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/21bb4af81cb860bdc6e0d0f4f5b18d95/transformed/customview-1.1.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:17:1-30:12
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/dhamo/.gradle/caches/transforms-4/2f249fe1a8eac621befa631d570ae743/transformed/savedstate-1.2.1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/db1fb514217fde9d8ce6bc1ed7414423/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/f8b110a618903d9a44a81cf8c1cc05ea/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:17:1-35:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/32094325027acd9d4357523cad654771/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/5f5cf9bc8a478441a4442508e24fdc61/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/cbf9b8dc3b2a4fcd47ab2c6ce40fd620/transformed/lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/c697ca9265f5edc67df2a612782b7e34/transformed/core-ktx-1.13.1/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/dhamo/.gradle/caches/transforms-4/e934e3dcc152c2feecd59bf5ebcc305d/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:2:1-7:12
+MERGED from [androidx.security:security-crypto:1.1.0-alpha06] /Users/dhamo/.gradle/caches/transforms-4/2b5ba3741f5164b0268ba232cfe029b7/transformed/security-crypto-1.1.0-alpha06/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/a907e5983576a086642c84411bdd95ef/transformed/cursoradapter-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:17:1-55:12
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/d261342da0327b3cfc82249630644165/transformed/cardview-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/5aa2d02d3a7ff3356d99cda5dd863bf7/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:17:1-27:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/4bfc8a475095d3cc279891bca071a6a0/transformed/interpolator-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/b846d001a1d7bf63538e8dfc51e3e90d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:17:1-33:12
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/b3c335a2e4dac877d07b317d25044a05/transformed/tracing-1.0.0/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/dhamo/.gradle/caches/transforms-4/56e461dd900682db42391eb94613295b/transformed/core-runtime-2.2.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/b2d8fb99919effc18c0393ccea2612f1/transformed/documentfile-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/f7891a1aeab952f81398ae62f7044118/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/3bf8f442b9dacbb0c964448eb532f094/transformed/print-1.0.0/AndroidManifest.xml:17:1-22:12
+MERGED from [org.chromium.net:cronet-api:119.6045.31] /Users/dhamo/.gradle/caches/transforms-4/90df6d95fb24f6c22dee3e367235824f/transformed/cronet-api-119.6045.31/AndroidManifest.xml:15:2-22:13
+	package
+		INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:3:5-67
+MERGED from [:aran-secure] /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-67
+MERGED from [:aran-secure] /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:7:5-67
+MERGED from [org.chromium.net:cronet-api:119.6045.31] /Users/dhamo/.gradle/caches/transforms-4/90df6d95fb24f6c22dee3e367235824f/transformed/cronet-api-119.6045.31/AndroidManifest.xml:19:6-67
+MERGED from [org.chromium.net:cronet-api:119.6045.31] /Users/dhamo/.gradle/caches/transforms-4/90df6d95fb24f6c22dee3e367235824f/transformed/cronet-api-119.6045.31/AndroidManifest.xml:19:6-67
+	android:name
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:3:22-64
+application
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:5:5-20:19
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:5:5-20:19
+MERGED from [:aran-secure] /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:5-20
+MERGED from [:aran-secure] /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:9:5-20
+MERGED from [com.google.android.material:material:1.12.0] /Users/dhamo/.gradle/caches/transforms-4/e42ec10dde01f7f9fa178136870b2d9c/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.12.0] /Users/dhamo/.gradle/caches/transforms-4/e42ec10dde01f7f9fa178136870b2d9c/transformed/material-1.12.0/AndroidManifest.xml:22:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dhamo/.gradle/caches/transforms-4/686b6263f56a272a8f3ff2db476094d9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dhamo/.gradle/caches/transforms-4/686b6263f56a272a8f3ff2db476094d9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:9:5-20
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:23:5-33:19
+MERGED from [com.google.android.gms:play-services-cronet:18.1.0] /Users/dhamo/.gradle/caches/transforms-4/b000422e289770a2aaf0c62f9674fcc6/transformed/play-services-cronet-18.1.0/AndroidManifest.xml:6:5-20
+MERGED from [com.google.android.gms:play-services-cronet:18.1.0] /Users/dhamo/.gradle/caches/transforms-4/b000422e289770a2aaf0c62f9674fcc6/transformed/play-services-cronet-18.1.0/AndroidManifest.xml:6:5-20
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dhamo/.gradle/caches/transforms-4/62f8902d1b2c4d0cd2eac2fafa0803b3/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dhamo/.gradle/caches/transforms-4/62f8902d1b2c4d0cd2eac2fafa0803b3/transformed/play-services-base-18.5.0/AndroidManifest.xml:4:5-6:19
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dhamo/.gradle/caches/transforms-4/7dd15af6067b9c4c1bf105aa53e8990c/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dhamo/.gradle/caches/transforms-4/7dd15af6067b9c4c1bf105aa53e8990c/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:4:5-20
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dhamo/.gradle/caches/transforms-4/c6d995942d71b25857f917c50b6c6592/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dhamo/.gradle/caches/transforms-4/c6d995942d71b25857f917c50b6c6592/transformed/play-services-basement-18.4.0/AndroidManifest.xml:5:5-7:19
+MERGED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:28:5-89
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:23:5-33:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:23:5-53:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/5aa2d02d3a7ff3356d99cda5dd863bf7/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/5aa2d02d3a7ff3356d99cda5dd863bf7/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:24:5-25:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/b846d001a1d7bf63538e8dfc51e3e90d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/b846d001a1d7bf63538e8dfc51e3e90d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:25:5-31:19
+	android:extractNativeLibs
+		INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:28:18-86
+	android:supportsRtl
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:9:9-35
+	android:label
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:7:9-34
+	android:allowBackup
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:6:9-36
+	android:theme
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:8:9-46
+activity#org.mazhai.aran.demo.MainActivity
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:11:9-18:20
+	android:exported
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:13:13-36
+	android:name
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:12:13-41
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:14:13-17:29
+action#android.intent.action.MAIN
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:15:17-69
+	android:name
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:15:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:16:17-77
+	android:name
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml:16:27-74
+uses-sdk
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml
+MERGED from [:aran-secure] /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [:aran-secure] /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/merged_manifest/debug/processDebugManifest/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.material:material:1.12.0] /Users/dhamo/.gradle/caches/transforms-4/e42ec10dde01f7f9fa178136870b2d9c/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.12.0] /Users/dhamo/.gradle/caches/transforms-4/e42ec10dde01f7f9fa178136870b2d9c/transformed/material-1.12.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/dhamo/.gradle/caches/transforms-4/bf9053f5d225eb5071ec999a023bd120/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat-resources:1.7.0] /Users/dhamo/.gradle/caches/transforms-4/bf9053f5d225eb5071ec999a023bd120/transformed/appcompat-resources-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dhamo/.gradle/caches/transforms-4/686b6263f56a272a8f3ff2db476094d9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:2.0.1] /Users/dhamo/.gradle/caches/transforms-4/686b6263f56a272a8f3ff2db476094d9/transformed/constraintlayout-2.0.1/AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/dhamo/.gradle/caches/transforms-4/9f8421c645daa2f80d0bd3d657058c39/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.appcompat:appcompat:1.7.0] /Users/dhamo/.gradle/caches/transforms-4/9f8421c645daa2f80d0bd3d657058c39/transformed/appcompat-1.7.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/aed27d271f612912e542c0bfe3d36832/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2-views-helper:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/aed27d271f612912e542c0bfe3d36832/transformed/emoji2-views-helper-1.3.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:21:5-44
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/55e659f4393aeff1307af9e9a4e6e556/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.viewpager2:viewpager2:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/55e659f4393aeff1307af9e9a4e6e556/transformed/viewpager2-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [com.google.android.gms:play-services-cronet:18.1.0] /Users/dhamo/.gradle/caches/transforms-4/b000422e289770a2aaf0c62f9674fcc6/transformed/play-services-cronet-18.1.0/AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-cronet:18.1.0] /Users/dhamo/.gradle/caches/transforms-4/b000422e289770a2aaf0c62f9674fcc6/transformed/play-services-cronet-18.1.0/AndroidManifest.xml:4:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dhamo/.gradle/caches/transforms-4/62f8902d1b2c4d0cd2eac2fafa0803b3/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-base:18.5.0] /Users/dhamo/.gradle/caches/transforms-4/62f8902d1b2c4d0cd2eac2fafa0803b3/transformed/play-services-base-18.5.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dhamo/.gradle/caches/transforms-4/7dd15af6067b9c4c1bf105aa53e8990c/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-tasks:18.2.0] /Users/dhamo/.gradle/caches/transforms-4/7dd15af6067b9c4c1bf105aa53e8990c/transformed/play-services-tasks-18.2.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dhamo/.gradle/caches/transforms-4/c6d995942d71b25857f917c50b6c6592/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
+MERGED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dhamo/.gradle/caches/transforms-4/c6d995942d71b25857f917c50b6c6592/transformed/play-services-basement-18.4.0/AndroidManifest.xml:3:5-44
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/dhamo/.gradle/caches/transforms-4/37a2f8ebae98fa8b5331bb0c33c69077/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.fragment:fragment:1.5.4] /Users/dhamo/.gradle/caches/transforms-4/37a2f8ebae98fa8b5331bb0c33c69077/transformed/fragment-1.5.4/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.activity:activity:1.8.0] /Users/dhamo/.gradle/caches/transforms-4/9a5dc63cdadd45f56f4147b71bc9efc5/transformed/activity-1.8.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.8.0] /Users/dhamo/.gradle/caches/transforms-4/9a5dc63cdadd45f56f4147b71bc9efc5/transformed/activity-1.8.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/564eabf43564284a0f5edcabb897efe9/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.drawerlayout:drawerlayout:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/564eabf43564284a0f5edcabb897efe9/transformed/drawerlayout-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/3671bf60b9403407a828369c333f347f/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/3671bf60b9403407a828369c333f347f/transformed/coordinatorlayout-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.transition:transition:1.5.0] /Users/dhamo/.gradle/caches/transforms-4/cea29628ca9b17c62eaefbf47caf832e/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.transition:transition:1.5.0] /Users/dhamo/.gradle/caches/transforms-4/cea29628ca9b17c62eaefbf47caf832e/transformed/transition-1.5.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/6bd3206b4826b90e870aa6e0426ecadb/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.dynamicanimation:dynamicanimation:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/6bd3206b4826b90e870aa6e0426ecadb/transformed/dynamicanimation-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/4e1f2424bbee6995f71e6b9eb12aafe4/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/4e1f2424bbee6995f71e6b9eb12aafe4/transformed/vectordrawable-animated-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/211da192ac8d1ad74e05deddd2a802a4/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/211da192ac8d1ad74e05deddd2a802a4/transformed/vectordrawable-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/5d002e17427ff74209333620e3244104/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/5d002e17427ff74209333620e3244104/transformed/legacy-support-core-utils-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/7a375e43c3ce23aecd50f223c90f57ed/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/7a375e43c3ce23aecd50f223c90f57ed/transformed/loader-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/ff2c1bc7c9159b852a04bdd5e19dccb0/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/ff2c1bc7c9159b852a04bdd5e19dccb0/transformed/viewpager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/d0bb335a9db74147a1a5da8e1c465eb7/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.recyclerview:recyclerview:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/d0bb335a9db74147a1a5da8e1c465eb7/transformed/recyclerview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/21bb4af81cb860bdc6e0d0f4f5b18d95/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.customview:customview:1.1.0] /Users/dhamo/.gradle/caches/transforms-4/21bb4af81cb860bdc6e0d0f4f5b18d95/transformed/customview-1.1.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/dhamo/.gradle/caches/transforms-4/2f249fe1a8eac621befa631d570ae743/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.savedstate:savedstate:1.2.1] /Users/dhamo/.gradle/caches/transforms-4/2f249fe1a8eac621befa631d570ae743/transformed/savedstate-1.2.1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/db1fb514217fde9d8ce6bc1ed7414423/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/db1fb514217fde9d8ce6bc1ed7414423/transformed/lifecycle-livedata-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/f8b110a618903d9a44a81cf8c1cc05ea/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/f8b110a618903d9a44a81cf8c1cc05ea/transformed/lifecycle-viewmodel-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:21:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/32094325027acd9d4357523cad654771/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/32094325027acd9d4357523cad654771/transformed/lifecycle-livedata-core-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/5f5cf9bc8a478441a4442508e24fdc61/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/5f5cf9bc8a478441a4442508e24fdc61/transformed/lifecycle-runtime-2.6.2/AndroidManifest.xml:5:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/cbf9b8dc3b2a4fcd47ab2c6ce40fd620/transformed/lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel-savedstate:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/cbf9b8dc3b2a4fcd47ab2c6ce40fd620/transformed/lifecycle-viewmodel-savedstate-2.6.2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/c697ca9265f5edc67df2a612782b7e34/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.core:core-ktx:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/c697ca9265f5edc67df2a612782b7e34/transformed/core-ktx-1.13.1/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/dhamo/.gradle/caches/transforms-4/e934e3dcc152c2feecd59bf5ebcc305d/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.annotation:annotation-experimental:1.4.0] /Users/dhamo/.gradle/caches/transforms-4/e934e3dcc152c2feecd59bf5ebcc305d/transformed/annotation-experimental-1.4.0/AndroidManifest.xml:5:5-44
+MERGED from [androidx.security:security-crypto:1.1.0-alpha06] /Users/dhamo/.gradle/caches/transforms-4/2b5ba3741f5164b0268ba232cfe029b7/transformed/security-crypto-1.1.0-alpha06/AndroidManifest.xml:20:5-44
+MERGED from [androidx.security:security-crypto:1.1.0-alpha06] /Users/dhamo/.gradle/caches/transforms-4/2b5ba3741f5164b0268ba232cfe029b7/transformed/security-crypto-1.1.0-alpha06/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/a907e5983576a086642c84411bdd95ef/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/a907e5983576a086642c84411bdd95ef/transformed/cursoradapter-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:21:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/d261342da0327b3cfc82249630644165/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/d261342da0327b3cfc82249630644165/transformed/cardview-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/5aa2d02d3a7ff3356d99cda5dd863bf7/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/5aa2d02d3a7ff3356d99cda5dd863bf7/transformed/versionedparcelable-1.1.1/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/4bfc8a475095d3cc279891bca071a6a0/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/4bfc8a475095d3cc279891bca071a6a0/transformed/interpolator-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/b846d001a1d7bf63538e8dfc51e3e90d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/b846d001a1d7bf63538e8dfc51e3e90d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:21:5-23:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/b3c335a2e4dac877d07b317d25044a05/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.tracing:tracing:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/b3c335a2e4dac877d07b317d25044a05/transformed/tracing-1.0.0/AndroidManifest.xml:20:5-22:41
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/dhamo/.gradle/caches/transforms-4/56e461dd900682db42391eb94613295b/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.2.0] /Users/dhamo/.gradle/caches/transforms-4/56e461dd900682db42391eb94613295b/transformed/core-runtime-2.2.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/b2d8fb99919effc18c0393ccea2612f1/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/b2d8fb99919effc18c0393ccea2612f1/transformed/documentfile-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/f7891a1aeab952f81398ae62f7044118/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/f7891a1aeab952f81398ae62f7044118/transformed/localbroadcastmanager-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/3bf8f442b9dacbb0c964448eb532f094/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /Users/dhamo/.gradle/caches/transforms-4/3bf8f442b9dacbb0c964448eb532f094/transformed/print-1.0.0/AndroidManifest.xml:20:5-44
+MERGED from [org.chromium.net:cronet-api:119.6045.31] /Users/dhamo/.gradle/caches/transforms-4/90df6d95fb24f6c22dee3e367235824f/transformed/cronet-api-119.6045.31/AndroidManifest.xml:18:6-75
+MERGED from [org.chromium.net:cronet-api:119.6045.31] /Users/dhamo/.gradle/caches/transforms-4/90df6d95fb24f6c22dee3e367235824f/transformed/cronet-api-119.6045.31/AndroidManifest.xml:18:6-75
+	android:targetSdkVersion
+		INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/AndroidManifest.xml
+provider#androidx.startup.InitializationProvider
+ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:24:9-32:20
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/b846d001a1d7bf63538e8dfc51e3e90d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+MERGED from [androidx.startup:startup-runtime:1.1.1] /Users/dhamo/.gradle/caches/transforms-4/b846d001a1d7bf63538e8dfc51e3e90d/transformed/startup-runtime-1.1.1/AndroidManifest.xml:26:9-30:34
+	tools:node
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:28:13-31
+	android:authorities
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:26:13-68
+	android:exported
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:27:13-37
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:25:13-67
+meta-data#androidx.emoji2.text.EmojiCompatInitializer
+ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.emoji2:emoji2:1.3.0] /Users/dhamo/.gradle/caches/transforms-4/e05f9bf51bd0a769d9cfcc692e44eacb/transformed/emoji2-1.3.0/AndroidManifest.xml:30:17-75
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/dhamo/.gradle/caches/transforms-4/62f8902d1b2c4d0cd2eac2fafa0803b3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:9-173
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/dhamo/.gradle/caches/transforms-4/62f8902d1b2c4d0cd2eac2fafa0803b3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:146-170
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/dhamo/.gradle/caches/transforms-4/62f8902d1b2c4d0cd2eac2fafa0803b3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:86-145
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:18.5.0] /Users/dhamo/.gradle/caches/transforms-4/62f8902d1b2c4d0cd2eac2fafa0803b3/transformed/play-services-base-18.5.0/AndroidManifest.xml:5:19-85
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dhamo/.gradle/caches/transforms-4/c6d995942d71b25857f917c50b6c6592/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:9-122
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dhamo/.gradle/caches/transforms-4/c6d995942d71b25857f917c50b6c6592/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:66-119
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:18.4.0] /Users/dhamo/.gradle/caches/transforms-4/c6d995942d71b25857f917c50b6c6592/transformed/play-services-basement-18.4.0/AndroidManifest.xml:6:20-65
+permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+permission#org.mazhai.aran.demo.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:22:5-24:47
+	android:protectionLevel
+		ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:24:9-44
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:23:9-81
+uses-permission#${applicationId}.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+uses-permission#org.mazhai.aran.demo.DYNAMIC_RECEIVER_NOT_EXPORTED_PERMISSION
+ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:26:5-97
+	android:name
+		ADDED from [androidx.core:core:1.13.1] /Users/dhamo/.gradle/caches/transforms-4/2fccf71b9f15b85bfdbe94cdebc43a2b/transformed/core-1.13.1/AndroidManifest.xml:26:22-94
+meta-data#androidx.lifecycle.ProcessLifecycleInitializer
+ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.lifecycle:lifecycle-process:2.6.2] /Users/dhamo/.gradle/caches/transforms-4/bfa8aa4b78a4a55a3747fe8b213e6a2c/transformed/lifecycle-process-2.6.2/AndroidManifest.xml:30:17-78
+meta-data#androidx.profileinstaller.ProfileInstallerInitializer
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:29:13-31:52
+	android:value
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:31:17-49
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:30:17-85
+receiver#androidx.profileinstaller.ProfileInstallReceiver
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:34:9-52:20
+	android:enabled
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:37:13-35
+	android:exported
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:38:13-36
+	android:permission
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:39:13-57
+	android:directBootAware
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:36:13-44
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:35:13-76
+intent-filter#action:name:androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:40:13-42:29
+action#androidx.profileinstaller.action.INSTALL_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:17-91
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:41:25-88
+intent-filter#action:name:androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:43:13-45:29
+action#androidx.profileinstaller.action.SKIP_FILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:17-85
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:44:25-82
+intent-filter#action:name:androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:46:13-48:29
+action#androidx.profileinstaller.action.SAVE_PROFILE
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:17-88
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:47:25-85
+intent-filter#action:name:androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:49:13-51:29
+action#androidx.profileinstaller.action.BENCHMARK_OPERATION
+ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:17-95
+	android:name
+		ADDED from [androidx.profileinstaller:profileinstaller:1.3.1] /Users/dhamo/.gradle/caches/transforms-4/5c5e9b075bab5185394030941f7f5ddf/transformed/profileinstaller-1.3.1/AndroidManifest.xml:50:25-92
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [org.chromium.net:cronet-api:119.6045.31] /Users/dhamo/.gradle/caches/transforms-4/90df6d95fb24f6c22dee3e367235824f/transformed/cronet-api-119.6045.31/AndroidManifest.xml:20:6-79
+	android:name
+		ADDED from [org.chromium.net:cronet-api:119.6045.31] /Users/dhamo/.gradle/caches/transforms-4/90df6d95fb24f6c22dee3e367235824f/transformed/cronet-api-119.6045.31/AndroidManifest.xml:20:23-77

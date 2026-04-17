@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-aran-security"
+        version="1.0.0">
+
+  <name>AranSecurity</name>
+  <author>Aran Security (support@aran.mazhai.org)</author>
+  <description>Enterprise mobile security SDK for Cordova - Hardware attestation, threat detection, and cloud-managed protection</description>
+  <keywords>cordova,security,mobile-security,threat-detection,hardware-attestation,ssl-pinning,aran</keywords>
+  <license>Proprietary</license>
+
+  <engines>
+    <engine name="cordova" version=">=10.0.0"/>
+    <engine name="cordova-android" version=">=10.0.0"/>
+    <engine name="cordova-ios" version=">=6.0.0"/>
+  </engines>
+
+  <js-module src="www/aran-security.js" name="AranSecurity">
+    <clobbers target="AranSecurity" />
+  </js-module>
+
+  <!-- Android Platform -->
+  <platform name="android">
+    <config-file target="res/xml/config.xml" parent="/*">
+      <feature name="AranSecurityPlugin">
+        <param name="android-package" value="org.mazhai.aran.cordova.AranSecurityPlugin"/>
+        <param name="onload" value="true" />
+      </feature>
+      <preference name="GradlePluginKotlinEnabled" value="true" />
+      <preference name="GradlePluginKotlinVersion" value="1.9.0" />
+    </config-file>
+
+    <config-file target="AndroidManifest.xml" parent="/manifest">
+      <uses-permission android:name="android.permission.INTERNET" />
+      <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    </config-file>
+
+    <source-file src="src/android/AranSecurityPlugin.kt" 
+                 target-dir="app/src/main/kotlin/org/mazhai/aran/cordova/"/>
+    <source-file src="src/android/DeviceStatusMapper.kt" 
+                 target-dir="app/src/main/kotlin/org/mazhai/aran/cordova/"/>
+    
+    <framework src="src/android/aran-security.gradle" custom="true" type="gradleReference" />
+  </platform>
+
+  <!-- iOS Platform -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="AranSecurityPlugin">
+        <param name="ios-package" value="AranSecurityPlugin"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+
+    <header-file src="src/ios/AranSecurity-Bridging-Header.h" />
+    <source-file src="src/ios/AranSecurityPlugin.swift" />
+    <source-file src="src/ios/AranSecure.swift" />
+    <source-file src="src/ios/DeviceStatus.swift" />
+    <source-file src="src/ios/ThreatDetector.swift" />
+    
+    <framework src="Security.framework" />
+    <framework src="LocalAuthentication.framework" />
+  </platform>
+</plugin>

@@ -1,0 +1,41 @@
+{
+  "name": "@aran/nativescript-rasp",
+  "version": "1.0.0",
+  "description": "Blackbox Runtime Application Self-Protection engine for NativeScript applications",
+  "main": "index",
+  "types": "index.d.ts",
+  "license": "Proprietary",
+  "author": "ARAN Security",
+  "keywords": [
+    "rasp",
+    "security",
+    "antitamper",
+    "jailbreak",
+    "debugger",
+    "frida",
+    "nativescript",
+    "nativescript-angular"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aran/nativescript-rasp"
+  },
+  "bugs": {
+    "url": "https://github.com/aran/nativescript-rasp/issues"
+  },
+  "homepage": "https://github.com/aran/nativescript-rasp#readme",
+  "nativescript": {
+    "platforms": {
+      "android": "7.0",
+      "ios": "7.0"
+    }
+  },
+  "peerDependencies": {
+    "@nativescript/core": "^8.0.0"
+  },
+  "devDependencies": {
+    "@nativescript/android": "^8.0.0",
+    "@nativescript/ios": "^8.0.0",
+    "typescript": "^5.0.0"
+  }
+}

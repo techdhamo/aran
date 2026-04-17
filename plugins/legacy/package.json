@@ -1,0 +1,40 @@
+{
+  "name": "@aran/legacy-rasp",
+  "version": "1.0.0",
+  "description": "Blackbox Runtime Application Self-Protection engine for legacy mobile frameworks",
+  "main": "bridges.js",
+  "license": "Proprietary",
+  "author": "ARAN Security",
+  "keywords": [
+    "rasp",
+    "security",
+    "antitamper",
+    "jailbreak",
+    "debugger",
+    "frida",
+    "phonegap",
+    "cordova",
+    "appcelerator",
+    "titanium",
+    "sencha",
+    "framework7",
+    "ionic",
+    "ionic-legacy"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aran/legacy-rasp"
+  },
+  "bugs": {
+    "url": "https://github.com/aran/legacy-rasp/issues"
+  },
+  "homepage": "https://github.com/aran/legacy-rasp#readme",
+  "files": [
+    "bridges.js",
+    "phonegap/",
+    "appcelerator/",
+    "sencha/",
+    "framework7/",
+    "ionic/"
+  ]
+}

@@ -1,0 +1,50 @@
+/* Core CSS required for Ionic components to work properly */
+@import "@ionic/angular/css/core.css";
+@import "@ionic/angular/css/normalize.css";
+@import "@ionic/angular/css/structure.css";
+@import "@ionic/angular/css/typography.css";
+@import "@ionic/angular/css/display.css";
+@import "@ionic/angular/css/padding.css";
+@import "@ionic/angular/css/float-elements.css";
+@import "@ionic/angular/css/text-alignment.css";
+@import "@ionic/angular/css/text-transformation.css";
+@import "@ionic/angular/css/flex-utils.css";
+
+/* Force Light Mode — NO dark mode */
+:root {
+  color-scheme: light only;
+
+  --ion-color-primary: #0066CC;
+  --ion-color-primary-rgb: 0, 102, 204;
+  --ion-color-primary-contrast: #FFFFFF;
+  --ion-color-primary-shade: #0052A3;
+  --ion-color-primary-tint: #1A75D1;
+
+  --ion-color-secondary: #1A1A1A;
+  --ion-color-secondary-rgb: 26, 26, 26;
+  --ion-color-secondary-contrast: #FFFFFF;
+  --ion-color-secondary-shade: #111111;
+  --ion-color-secondary-tint: #333333;
+
+  --ion-background-color: #FFFFFF;
+  --ion-text-color: #1A1A1A;
+  --ion-toolbar-background: #FFFFFF;
+  --ion-toolbar-color: #1A1A1A;
+  --ion-item-background: #FFFFFF;
+  --ion-card-background: #FFFFFF;
+}
+
+/* Swiper global config */
+swiper-container {
+  width: 100%;
+  --swiper-theme-color: #0066CC;
+  --swiper-navigation-size: 28px;
+}
+swiper-container::part(button-prev),
+swiper-container::part(button-next) {
+  background: rgba(255,255,255,0.9);
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}

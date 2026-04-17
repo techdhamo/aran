@@ -1,0 +1,40 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <TargetFrameworks Condition=" '$(OS)' == 'Windows_NT' ">net8.0-android;net8.0-ios</TargetFrameworks>
+    <TargetFrameworks Condition=" '$(OS)' != 'Windows_NT' ">net8.0-ios</TargetFrameworks>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <Version>1.0.0</Version>
+    <Authors>ARAN Security</Authors>
+    <Company>ARAN Security</Company>
+    <Product>ARAN RASP Engine</Product>
+    <Description>Blackbox Runtime Application Self-Protection engine for Xamarin/.NET MAUI applications with remote library fetching</Description>
+    <Copyright>© 2024 ARAN Security</Copyright>
+    <PackageLicenseExpression>Proprietary</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/aran/xamarin-maui-rasp</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/aran/xamarin-maui-rasp</RepositoryUrl>
+    <PackageTags>rasp;security;antitamper;jailbreak;debugger;frida;xamarin;maui</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Maui.Controls" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0-android' ">
+    <PackageReference Include="Com.Aran.Security.RaspCore" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net8.0-ios' ">
+    <PackageReference Include="ARANCore" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="README.md" Pack="true" PackagePath="\" />
+    <None Include="LICENSE" Pack="true" PackagePath="\" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <RestoreSources>https://api.nuget.org/v3/index.json;https://nuget.aran-security.com/v3/index.json</RestoreSources>
+  </PropertyGroup>
+</Project>

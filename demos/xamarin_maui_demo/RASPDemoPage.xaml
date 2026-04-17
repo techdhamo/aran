@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamarinMAUIDemo.RASPDemoPage"
+             Title="ARAN RASP Demo">
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="16">
+            
+            <Label Text="ARAN RASP Demo"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#333333"/>
+            
+            <Label Text="Xamarin/MAUI"
+                   FontSize="16"
+                   TextColor="#666666"/>
+            
+            <Frame BackgroundColor="White"
+                   CornerRadius="12"
+                   Padding="16"
+                   HasShadow="True">
+                <StackLayout>
+                    <Label Text="RASP Engine Status"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#333333"
+                           MarginBottom="12"/>
+                    <FlexLayout Direction="Row" AlignItems="Center">
+                        <Label x:Name="StatusIcon"
+                               Text="○"
+                               FontSize="24"
+                               TextColor="#F44336"
+                               MarginRight="8"/>
+                        <Label x:Name="StatusText"
+                               Text="Not Initialized"
+                               FontSize="16"
+                               FontAttributes="Bold"
+                               TextColor="#F44336"/>
+                    </FlexLayout>
+                </StackLayout>
+            </Frame>
+            
+            <Button x:Name="RunAllButton"
+                    Text="Run All Security Checks"
+                    BackgroundColor="#6200EE"
+                    TextColor="White"
+                    FontSize="16"
+                    FontAttributes="Bold"
+                    CornerRadius="12"
+                    Padding="16"
+                    Clicked="OnRunAllClicked"/>
+            
+            <Frame BackgroundColor="White"
+                   CornerRadius="12"
+                   Padding="16"
+                   HasShadow="True">
+                <StackLayout>
+                    <Label Text="Security Check Results"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#333333"
+                           MarginBottom="12"/>
+                    <Label x:Name="ResultsLabel"
+                           Text="No security checks run yet"
+                           TextColor="#999999"
+                           FontSize="16"
+                           HorizontalTextAlignment="Center"/>
+                </StackLayout>
+            </Frame>
+            
+            <Frame BackgroundColor="#E3F2FD"
+                   CornerRadius="12"
+                   Padding="16">
+                <StackLayout>
+                    <Label Text="Security Checks"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           TextColor="#1976D2"
+                           MarginBottom="8"/>
+                    <Label Text="• Integrity Check (0x1A2B)"
+                           FontSize="14"
+                           TextColor="#424242"/>
+                    <Label Text="• Debugger Check (0x2B3C)"
+                           FontSize="14"
+                           TextColor="#424242"/>
+                    <Label Text="• Root Check (0x3C4D)"
+                           FontSize="14"
+                           TextColor="#424242"/>
+                    <Label Text="• Jailbreak Check (0x4D5E)"
+                           FontSize="14"
+                           TextColor="#424242"/>
+                    <Label Text="• Frida Check (0x5E6F)"
+                           FontSize="14"
+                           TextColor="#424242"/>
+                    <Label Text="• Emulator Check (0x6F70)"
+                           FontSize="14"
+                           TextColor="#424242"/>
+                </StackLayout>
+            </Frame>
+            
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

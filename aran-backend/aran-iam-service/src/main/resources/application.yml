@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: aran-iam-service
+  threads:
+    virtual:
+      enabled: true
+
+aran:
+  jwt:
+    secret: ${ARAN_JWT_SECRET:aran-super-secure-jwt-key-please-change-in-production-256bits-minimum}
+    expiration-seconds: 3600

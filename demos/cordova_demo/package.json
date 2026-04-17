@@ -1,0 +1,30 @@
+{
+  "name": "cordova-rasp-demo",
+  "version": "1.0.0",
+  "description": "ARAN RASP Cordova Demo Application",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "cordova",
+    "rasp",
+    "security"
+  ],
+  "author": "ARAN Security",
+  "license": "MIT",
+  "devDependencies": {
+    "cordova": "^12.0.0",
+    "cordova-android": "^12.0.0",
+    "cordova-rasp": "file:../../plugins/cordova-plugin-aran-rasp"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-rasp": {},
+      "cordova-plugin-aran-rasp": {}
+    },
+    "platforms": [
+      "android"
+    ]
+  }
+}

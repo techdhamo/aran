@@ -1,0 +1,13 @@
+# Cloudflared Tunnel Configuration for Aran Security Platform
+# Single domain with path-based routing
+
+tunnel: d406a73a-bf0b-45a7-82a5-083e8db73564
+credentials-file: /etc/cloudflared/d406a73a-bf0b-45a7-82a5-083e8db73564.json
+
+ingress:
+  # Single entry point - all traffic goes through WAF
+  - hostname: aran.mazhai.org
+    service: http://aran-waf:8443
+
+  # Catch-all for other subdomains
+  - service: http_status:404

@@ -1,0 +1,14 @@
+{
+  "appId": "com.aran.capacitor.rasp.demo",
+  "appName": "ARAN RASP Demo",
+  "webDir": "dist",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "plugins": {
+    "AranRASP": {
+      "enabled": true
+    }
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "name": "@aran/react-native-rasp",
+  "version": "1.0.0",
+  "description": "Blackbox Runtime Application Self-Protection engine for React Native applications",
+  "main": "index.js",
+  "types": "index.d.ts",
+  "license": "Proprietary",
+  "author": "ARAN Security",
+  "keywords": [
+    "rasp",
+    "security",
+    "antitamper",
+    "jailbreak",
+    "debugger",
+    "frida",
+    "react-native",
+    "turbo-module"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aran/react-native-rasp"
+  },
+  "bugs": {
+    "url": "https://github.com/aran/react-native-rasp/issues"
+  },
+  "homepage": "https://github.com/aran/react-native-rasp#readme",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-native": ">=0.70.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-native": "^0.70.0",
+    "typescript": "^5.0.0"
+  },
+  "codegenConfig": {
+    "name": "RASPSpec",
+    "type": "modules",
+    "jsSrcsDir": "src"
+  },
+  "files": [
+    "android/",
+    "ios/",
+    "src/",
+    "index.js",
+    "index.d.ts",
+    "package.json"
+  ]
+}

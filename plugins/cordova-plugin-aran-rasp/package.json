@@ -1,0 +1,20 @@
+{
+  "name": "cordova-rasp",
+  "version": "1.0.0",
+  "description": "ARAN RASP Cordova Plugin",
+  "cordova": {
+    "id": "cordova-rasp",
+    "platforms": [
+      "android",
+      "ios"
+    ]
+  },
+  "keywords": [
+    "cordova",
+    "rasp",
+    "security",
+    "aran"
+  ],
+  "author": "ARAN Security",
+  "license": "MIT"
+}

@@ -1,0 +1,22 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml:1:1-7:12
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml:1:1-7:12
+	package
+		INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.INTERNET
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml:3:5-67
+	android:name
+		ADDED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml:3:22-64
+application
+ADDED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml:5:5-20
+uses-sdk
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml
+INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/AndroidManifest.xml

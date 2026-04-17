@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "org.mazhai.aran.aran-secure-release-9:/layout-v21/notification_action_tombstone.xml",
+        "source": "org.mazhai.aran.aran-secure-core-1.2.0-0:/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "org.mazhai.aran.aran-secure-release-9:/layout-v21/notification_template_custom_big.xml",
+        "source": "org.mazhai.aran.aran-secure-core-1.2.0-0:/layout-v21/notification_template_custom_big.xml"
+    },
+    {
+        "merged": "org.mazhai.aran.aran-secure-release-9:/layout-v21/notification_template_icon_group.xml",
+        "source": "org.mazhai.aran.aran-secure-core-1.2.0-0:/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "org.mazhai.aran.aran-secure-release-9:/layout-v21/notification_action.xml",
+        "source": "org.mazhai.aran.aran-secure-core-1.2.0-0:/layout-v21/notification_action.xml"
+    }
+]

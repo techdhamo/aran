@@ -1,0 +1,4 @@
+/Users/dhamo/Library/Android/sdk/cmake/3.22.1/bin/ninja \
+  -C \
+  /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/arm64-v8a \
+  aran-secure

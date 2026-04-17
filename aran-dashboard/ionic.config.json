@@ -1,0 +1,7 @@
+{
+  "name": "aran-dashboard",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

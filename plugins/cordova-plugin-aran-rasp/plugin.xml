@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  UNIVERSAL BLACKBOX RASP ENGINE - Cordova Plugin Specification
+  
+  This plugin.xml defines the Cordova plugin configuration
+  for the RASP engine, including native file mappings and permissions.
+  
+  Security Requirements:
+  - Obfuscated plugin ID and method names
+  - No sensitive strings in public interfaces
+-->
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        id="cordova-plugin-aran-rasp"
+        version="1.0.0">
+    
+    <name>ARAN RASP Engine</name>
+    <description>Blackbox Runtime Application Self-Protection engine for Cordova applications</description>
+    <license>Proprietary</license>
+    <keywords>rasp,security,antitamper,jailbreak,debugger,frida</keywords>
+    <author>ARAN Security</author>
+    
+    <!-- JavaScript Interface -->
+    <js-module src="www/rasp.js" name="AranRASP">
+        <clobbers target="AranRASP" />
+    </js-module>
+    
+    <!-- Android Configuration -->
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="AranRASP">
+                <param name="android-package" value="com.aran.rasp.AranRASP" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        
+        <!-- Source files -->
+        <source-file src="src/android/AranRASP.java" target-dir="src/com/aran/rasp" />
+        
+        <!-- Remote Maven repository for native library -->
+        <framework src="src/android/build.gradle" custom="true" type="gradleReference" />
+    </platform>
+    
+    <!-- iOS Configuration -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="AranRASP">
+                <param name="ios-package" value="AranRASP" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        
+        <!-- Source files -->
+        <source-file src="src/ios/AranRASP.m" />
+        
+        <!-- Frameworks -->
+        <framework src="Foundation.framework" />
+        <framework src="Darwin.framework" />
+        <framework src="Security.framework" />
+        
+        <!-- Remote CocoaPods repository for native library -->
+        <podspec>
+            <pods>
+                <!-- "Dumb" passthrough - the actual logic is in the Pod -->
+                <pod name="AranRuntime" spec="~> 1.0.0" />
+            </pods>
+        </podspec>
+    </platform>
+    
+</plugin>

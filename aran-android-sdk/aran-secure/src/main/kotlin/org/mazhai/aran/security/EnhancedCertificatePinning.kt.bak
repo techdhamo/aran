@@ -1,0 +1,415 @@
+package org.mazhai.aran.security
+
+import android.content.Context
+import android.util.Log
+
+import java.io.ByteArrayInputStream
+import java.security.cert.Certificate
+import java.security.cert.CertificateException
+import java.security.cert.CertificateFactory
+import java.security.cert.X509Certificate
+import java.util.concurrent.ExecutorService
+import java.util.concurrent.Executors
+import java.util.concurrent.atomic.AtomicBoolean
+import javax.net.ssl.HttpsURLConnection
+import javax.net.ssl.SSLContext
+import javax.net.ssl.SSLSocketFactory
+import javax.net.ssl.TrustManager
+import javax.net.ssl.TrustManagerFactory
+import javax.net.ssl.X509TrustManager
+
+class EnhancedCertificatePinning private constructor(private val context: Context) {
+    
+    companion object {
+        @Volatile
+        private var INSTANCE: EnhancedCertificatePinning? = null
+        
+        fun getInstance(context: Context): EnhancedCertificatePinning {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: EnhancedCertificatePinning(context.applicationContext).also { INSTANCE = it }
+            }
+        }
+        
+        @Volatile
+        private var openSSLInitialized = AtomicBoolean(false)
+        
+        // Expected certificate pins for api.dhamo.in
+        private val EXPECTED_PINS = arrayOf(
+            "sha256/raNsyIdcz+Lzp5xP7h+LccrnEnkVG4lyHdvMemhlZWI=",
+            // Add backup pins for certificate rotation
+        )
+        
+        private val ALLOWED_HOSTNAMES = arrayOf(
+            "api.dhamo.in",
+            "api2.dhamo.in"
+        )
+        
+        // Load native library
+        init {
+            System.loadLibrary("aran-secure")
+        }
+    }
+    
+    private val executorService: ExecutorService = Executors.newSingleThreadExecutor()
+    
+    /**
+     * Initialize OpenSSL for enhanced certificate pinning
+     */
+    private external fun initializeOpenSSL()
+    
+    /**
+     * Validate SSL connection using native code
+     */
+    private external fun validateSSLConnection(hostname: String, sslContextPtr: Long): Boolean
+    
+    /**
+     * Native certificate pinning validation
+     */
+    private external fun validateCertificatePinningNative(hostname: String, certBytes: ByteArray): Boolean
+    
+    /**
+     * Detect SSL/TLS tampering
+     */
+    external fun detectSSLTampering(): Boolean
+    
+    /**
+     * Validate complete connection security
+     */
+    external fun validateConnectionSecurity(hostname: String, port: Int): Boolean
+    
+    /**
+     * Get certificate details for debugging
+     */
+    private external fun getCertificateDetails(certBytes: ByteArray): String
+    
+    init {
+        // Initialize OpenSSL
+        if (!openSSLInitialized.get()) {
+            initializeOpenSSL()
+            openSSLInitialized.set(true)
+        }
+    }
+    
+    /**
+     * Create enhanced SSL socket factory with native validation
+     */
+    @Throws(Exception::class)
+    fun createEnhancedSSLSocketFactory(): SSLSocketFactory {
+        // Check for SSL tampering first
+        if (detectSSLTampering()) {
+            Log.e("AranCertPinning", "SSL tampering detected - aborting SSL socket factory creation")
+            throw SecurityException("SSL tampering detected")
+        }
+        
+        val tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm())
+        tmf.init(null as java.security.KeyStore?)
+        
+        var defaultTrustManager: X509TrustManager? = null
+        for (tm in tmf.trustManagers) {
+            if (tm is X509TrustManager) {
+                defaultTrustManager = tm
+                break
+            }
+        }
+        
+        val finalDefaultTrustManager = defaultTrustManager
+        
+        val enhancedTrustManager = object : X509TrustManager {
+            override fun checkClientTrusted(chain: Array<X509Certificate>, authType: String) {
+                finalDefaultTrustManager?.checkClientTrusted(chain, authType)
+            }
+            
+            override fun checkServerTrusted(chain: Array<X509Certificate>, authType: String) {
+                Log.d("AranCertPinning", "Enhanced server certificate validation started")
+                
+                // First, perform default validation
+                try {
+                    finalDefaultTrustManager?.checkServerTrusted(chain, authType)
+                    Log.d("AranCertPinning", "Default trust manager validation passed")
+                } catch (e: CertificateException) {
+                    Log.e("AranCertPinning", "Default trust manager validation failed", e)
+                    throw e
+                }
+                
+                // Then perform enhanced validation
+                if (!performEnhancedValidation(chain)) {
+                    Log.e("AranCertPinning", "Enhanced certificate validation failed")
+                    throw CertificateException("Enhanced certificate validation failed")
+                }
+                
+                Log.i("AranCertPinning", "Enhanced certificate validation PASSED")
+            }
+            
+            override fun getAcceptedIssuers(): Array<X509Certificate> {
+                return finalDefaultTrustManager?.acceptedIssuers ?: emptyArray()
+            }
+        }
+        
+        val sslContext = SSLContext.getInstance("TLS")
+        sslContext.init(null, arrayOf<TrustManager>(enhancedTrustManager), null)
+        
+        return sslContext.socketFactory
+    }
+    
+    /**
+     * Perform enhanced certificate validation
+     */
+    private fun performEnhancedValidation(certificates: Array<out Certificate>): Boolean {
+        if (certificates.isEmpty()) {
+            Log.e("AranCertPinning", "No certificates provided for enhanced validation")
+            return false
+        }
+        
+        for (cert in certificates) {
+            if (cert is X509Certificate) {
+                // Convert certificate to byte array for native validation
+                try {
+                    val certBytes = cert.encoded
+                    
+                    // Get hostname from certificate (simplified - should be extracted from connection)
+                    val hostname = "api.dhamo.in" // This should be passed from the connection
+                    
+                    // Validate using native code
+                    if (!validateCertificatePinningNative(hostname, certBytes)) {
+                        Log.e("AranCertPinning", "Native certificate pinning validation failed")
+                        return false
+                    }
+                    
+                    // Additional Java-level checks
+                    if (!validateCertificateMetadata(cert)) {
+                        Log.e("AranCertPinning", "Certificate metadata validation failed")
+                        return false
+                    }
+                    
+                    return true
+                    
+                } catch (e: Exception) {
+                    Log.e("AranCertPinning", "Error during enhanced certificate validation", e)
+                    return false
+                }
+            }
+        }
+        
+        return false
+    }
+    
+    /**
+     * Validate certificate metadata
+     */
+    private fun validateCertificateMetadata(cert: X509Certificate): Boolean {
+        try {
+            // Check if certificate is expired
+            cert.checkValidity()
+            
+            // Verify certificate usage
+            val keyUsage = cert.keyUsage
+            if (keyUsage != null && !keyUsage[0]) { // digitalSignature
+                Log.w("AranCertPinning", "Certificate not valid for digital signature")
+            }
+            
+            // Check certificate strength
+            val algorithm = cert.sigAlgName
+            if (algorithm.contains("SHA1") || algorithm.contains("MD5")) {
+                Log.e("AranCertPinning", "Weak signature algorithm detected: $algorithm")
+                return false
+            }
+            
+            // Log certificate details for debugging
+            Log.d("AranCertPinning", "Certificate validation details:")
+            Log.d("AranCertPinning", "  Subject: ${cert.subjectDN}")
+            Log.d("AranCertPinning", "  Issuer: ${cert.issuerDN}")
+            Log.d("AranCertPinning", "  Algorithm: $algorithm")
+            Log.d("AranCertPinning", "  Valid: ${cert.notBefore} to ${cert.notAfter}")
+            
+            return true
+            
+        } catch (e: Exception) {
+            Log.e("AranCertPinning", "Certificate metadata validation error", e)
+            return false
+        }
+    }
+    
+    /**
+     * Apply enhanced certificate pinning to HTTPS connection
+     */
+    @Throws(SecurityException::class)
+    fun applyEnhancedCertificatePinning(connection: HttpsURLConnection, hostname: String) {
+        try {
+            Log.d("AranCertPinning", "Applying enhanced certificate pinning for: $hostname")
+            
+            // Validate hostname
+            if (!isHostnameAllowed(hostname)) {
+                throw SecurityException("Hostname not allowed: $hostname")
+            }
+            
+            // Apply enhanced SSL socket factory
+            connection.sslSocketFactory = createEnhancedSSLSocketFactory()
+            
+            // Set hostname verifier
+            connection.hostnameVerifier = { requestedHost, session ->
+                if (!isHostnameAllowed(requestedHost)) {
+                    Log.e("AranCertPinning", "Hostname verification failed: $requestedHost")
+                    return@hostnameVerifier false
+                }
+                
+                // Additional hostname validation
+                try {
+                    val certificates = session.peerCertificates
+                    if (certificates.isNotEmpty()) {
+                        val cert = certificates[0]
+                        if (cert is X509Certificate) {
+                            // Check Common Name (CN) and Subject Alternative Names
+                            val cn = getCommonName(cert)
+                            val hostnameMatches = cn?.equals(requestedHost, ignoreCase = true) == true
+                            
+                            if (!hostnameMatches) {
+                                Log.e("AranCertPinning", "Hostname mismatch: requested=$requestedHost, cert=$cn")
+                                return@hostnameVerifier false
+                            }
+                        }
+                    }
+                } catch (e: Exception) {
+                    Log.e("AranCertPinning", "Hostname validation error", e)
+                    return@hostnameVerifier false
+                }
+                
+                true
+            }
+            
+            Log.d("AranCertPinning", "Enhanced certificate pinning applied successfully")
+            
+        } catch (e: Exception) {
+            Log.e("AranCertPinning", "Failed to apply enhanced certificate pinning", e)
+            throw SecurityException("Enhanced certificate pinning setup failed", e)
+        }
+    }
+    
+    /**
+     * Check if hostname is allowed
+     */
+    private fun isHostnameAllowed(hostname: String): Boolean {
+        return ALLOWED_HOSTNAMES.any { it.equals(hostname, ignoreCase = true) }
+    }
+    
+    /**
+     * Extract Common Name from certificate
+     */
+    private fun getCommonName(cert: X509Certificate): String? {
+        return try {
+            val subject = cert.subjectDN.name
+            val parts = subject.split(",")
+            
+            for (part in parts) {
+                val trimmed = part.trim()
+                if (trimmed.startsWith("CN=")) {
+                    return trimmed.substring(3)
+                }
+            }
+            null
+        } catch (e: Exception) {
+            Log.e("AranCertPinning", "Error extracting Common Name", e)
+            null
+        }
+    }
+    
+    /**
+     * Validate connection security comprehensively
+     */
+    fun validateConnectionSecurityComprehensive(hostname: String, port: Int) {
+        executorService.execute {
+            try {
+                Log.d("AranCertPinning", "Starting comprehensive connection security validation for: $hostname:$port")
+                
+                // Check for SSL tampering
+                if (detectSSLTampering()) {
+                    Log.e("AranCertPinning", "SSL tampering detected during comprehensive validation")
+                    triggerSecurityResponse("SSL tampering detected")
+                    return@execute
+                }
+                
+                // Validate connection security using native code
+                if (!validateConnectionSecurity(hostname, port)) {
+                    Log.e("AranCertPinning", "Native connection security validation failed")
+                    triggerSecurityResponse("Connection security validation failed")
+                    return@execute
+                }
+                
+                Log.i("AranCertPinning", "Comprehensive connection security validation PASSED")
+                
+            } catch (e: Exception) {
+                Log.e("AranCertPinning", "Error during comprehensive security validation", e)
+                triggerSecurityResponse("Comprehensive security validation error: ${e.message}")
+            }
+        }
+    }
+    
+    /**
+     * Get certificate fingerprint for debugging
+     */
+    fun getCertificateFingerprint(certificate: Certificate) {
+        executorService.execute {
+            try {
+                if (certificate is X509Certificate) {
+                    val certBytes = certificate.encoded
+                    val details = getCertificateDetails(certBytes)
+                    Log.d("AranCertPinning", "Certificate Details:\n$details")
+                }
+            } catch (e: Exception) {
+                Log.e("AranCertPinning", "Error getting certificate fingerprint", e)
+            }
+        }
+    }
+    
+    /**
+     * Validate certificate pin against expected pins
+     */
+    fun validateCertificatePin(calculatedPin: String): Boolean {
+        if (calculatedPin.isEmpty()) return false
+        
+        for (expectedPin in EXPECTED_PINS) {
+            if (calculatedPin == expectedPin) {
+                Log.i("AranCertPinning", "Certificate pin MATCHED: $calculatedPin")
+                return true
+            }
+        }
+        
+        Log.e("AranCertPinning", "Certificate pin NOT MATCHED: $calculatedPin")
+        Log.e("AranCertPinning", "Expected pins:")
+        for (expectedPin in EXPECTED_PINS) {
+            Log.e("AranCertPinning", "  $expectedPin")
+        }
+        
+        return false
+    }
+    
+    /**
+     * Trigger security response
+     */
+    private fun triggerSecurityResponse(reason: String) {
+        Log.e("AranCertPinning", "Enhanced certificate security breach: $reason")
+        
+        // Kill app immediately
+        android.os.Process.killProcess(android.os.Process.myPid())
+        System.exit(1)
+    }
+    
+    /**
+     * Get expected certificate pins
+     */
+    fun getExpectedPins(): Array<String> {
+        return EXPECTED_PINS.clone()
+    }
+    
+    /**
+     * Get allowed hostnames
+     */
+    fun getAllowedHostnames(): Array<String> {
+        return ALLOWED_HOSTNAMES.clone()
+    }
+    
+    fun shutdown() {
+        if (!executorService.isShutdown) {
+            executorService.shutdown()
+        }
+    }
+}

@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/arm64-v8a",
+  "command": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Daran_secure_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O2 -g -DNDEBUG -fPIC -o CMakeFiles/aran-secure.dir/rasp_core_engine.cpp.o -c /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/rasp_core_engine.cpp",
+  "file": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/rasp_core_engine.cpp"
+},
+{
+  "directory": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/arm64-v8a",
+  "command": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Daran_secure_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O2 -g -DNDEBUG -fPIC -o CMakeFiles/aran-secure.dir/aran-core.cpp.o -c /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/aran-core.cpp",
+  "file": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/aran-core.cpp"
+},
+{
+  "directory": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/arm64-v8a",
+  "command": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Daran_secure_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O2 -g -DNDEBUG -fPIC -o CMakeFiles/aran-secure.dir/aran_genesis.cpp.o -c /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/aran_genesis.cpp",
+  "file": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/aran_genesis.cpp"
+},
+{
+  "directory": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/arm64-v8a",
+  "command": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Daran_secure_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O2 -g -DNDEBUG -fPIC -o CMakeFiles/aran-secure.dir/aran_pin_validator.cpp.o -c /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/aran_pin_validator.cpp",
+  "file": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/aran_pin_validator.cpp"
+},
+{
+  "directory": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/arm64-v8a",
+  "command": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Daran_secure_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O2 -g -DNDEBUG -fPIC -o CMakeFiles/aran-secure.dir/anti_frida.cpp.o -c /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/anti_frida.cpp",
+  "file": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/anti_frida.cpp"
+},
+{
+  "directory": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/arm64-v8a",
+  "command": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Daran_secure_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O2 -g -DNDEBUG -fPIC -o CMakeFiles/aran-secure.dir/advanced_anti_frida.cpp.o -c /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/advanced_anti_frida.cpp",
+  "file": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/advanced_anti_frida.cpp"
+},
+{
+  "directory": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/arm64-v8a",
+  "command": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Daran_secure_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O2 -g -DNDEBUG -fPIC -o CMakeFiles/aran-secure.dir/rasp_defense.cpp.o -c /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/rasp_defense.cpp",
+  "file": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/rasp_defense.cpp"
+},
+{
+  "directory": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/arm64-v8a",
+  "command": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -Daran_secure_EXPORTS -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -std=c++17 -O2 -g -DNDEBUG -fPIC -o CMakeFiles/aran-secure.dir/advanced_rasp_defense.cpp.o -c /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/advanced_rasp_defense.cpp",
+  "file": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/advanced_rasp_defense.cpp"
+}
+]

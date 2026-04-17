@@ -1,0 +1,162 @@
+static_resources:
+  listeners:
+    - name: aran_edge_listener
+      address:
+        socket_address: { address: 0.0.0.0, port_value: 8443 }
+      filter_chains:
+        - filters:
+            - name: envoy.filters.network.http_connection_manager
+              typed_config:
+                "@type": type.googleapis.com/envoy.extensions.filters.network.http_connection_manager.v3.HttpConnectionManager
+                stat_prefix: aran_waf
+                use_remote_address: true
+                access_log:
+                  - name: envoy.access_loggers.stdout
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.access_loggers.stream.v3.StdoutAccessLog
+                      log_format:
+                        json_format:
+                          ts:         "%START_TIME%"
+                          method:     "%REQ(:METHOD)%"
+                          path:       "%REQ(X-ENVOY-ORIGINAL-PATH?:PATH)%"
+                          status:     "%RESPONSE_CODE%"
+                          sigil_sub:  "%REQ(X-Aran-Claims-Sub)%"
+                          rasp_mask:  "%REQ(X-Aran-Rasp-Mask)%"
+                          upstream:   "%UPSTREAM_CLUSTER%"
+                          duration_ms: "%DURATION%"
+                http_filters:
+                  # ── Filter 1: jwt_authn ──────────────────────────────────────
+                  # Native C++ JWT verification — no JVM on the hot path.
+                  # ES256 public keys are served by aran-iam-service JWKS endpoint.
+                  # Envoy polls JWKS every 300s and caches between rotations.
+                  # On failure: hard 401, request never reaches SCG.
+                  # On success: decoded payload forwarded as X-Aran-Claims header.
+                  - name: envoy.filters.http.jwt_authn
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.jwt_authn.v3.JwtAuthentication
+                      providers:
+                        aran_sigil_provider:
+                          issuer: aran-sdk
+                          audiences:
+                            - aran-waf
+                          from_headers:
+                            - name: X-Aran-Sigil
+                          remote_jwks:
+                            http_uri:
+                              uri: http://aran-iam-service:8081/api/v1/auth/jwks
+                              cluster: aran_jwks_cluster
+                              timeout: 5s
+                            cache_duration: 300s
+                            async_fetch:
+                              fast_listener: true
+                          jwt_cache_config:
+                            jwt_cache_size: 1000
+                          forward: false
+                          forward_payload_header: X-Aran-Claims
+                          pad_forward_payload_header: false
+                          clock_skew_seconds: 30
+                      rules:
+                        # Telemetry ingest and health — no Sigil required
+                        - match:
+                            prefix: /api/v1/telemetry/
+                        - match:
+                            prefix: /actuator/health
+                        # Auth endpoints — no Sigil (user is not yet authenticated)
+                        - match:
+                            prefix: /api/v1/auth/
+                        # All other routes — Sigil mandatory
+                        - match:
+                            prefix: /api/v1/
+                          requires:
+                            provider_name: aran_sigil_provider
+
+                  # ── Filter 2: Header injection ───────────────────────────────
+                  # Extract mask and sub from the decoded JWT payload header
+                  # so SCG can read them without re-parsing the JWT.
+                  - name: envoy.filters.http.lua
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.lua.v3.Lua
+                      inline_code: |
+                        function envoy_on_request(request_handle)
+                          local claims_b64 = request_handle:headers():get("x-aran-claims")
+                          if claims_b64 == nil then return end
+                          -- Decode base64 payload (middle segment of JWT already extracted by jwt_authn)
+                          local json = require("cjson")
+                          local ok, claims = pcall(json.decode,
+                            (claims_b64:gsub('%-', '+'):gsub('_', '/') .. "=="):match("^(.-)=*$")
+                          )
+                          if not ok then return end
+                          local mask = tostring(claims["mask"] or 0)
+                          local sub  = tostring(claims["sub"]  or "")
+                          local app  = tostring(claims["app"]  or "")
+                          request_handle:headers():replace("x-aran-rasp-mask", mask)
+                          request_handle:headers():replace("x-aran-device-id",  sub)
+                          request_handle:headers():replace("x-aran-app-id",     app)
+                        end
+
+                  - name: envoy.filters.http.router
+                    typed_config:
+                      "@type": type.googleapis.com/envoy.extensions.filters.http.router.v3.Router
+
+                route_config:
+                  name: aran_routes
+                  virtual_hosts:
+                    - name: aran_banking_services
+                      domains: ["*"]
+                      routes:
+                        # Frontend routes
+                        - match: { prefix: /app }
+                          route:
+                            cluster: aran_frontend_cluster
+                            timeout: 15s
+                        - match: { prefix: / }
+                          redirect:
+                            https_redirect: true
+                            path_redirect: /app
+                        # Backend API routes
+                        - match: { prefix: /api/v1/telemetry/ }
+                          route:
+                            cluster: aran_gateway_cluster
+                            timeout: 15s
+                        - match: { prefix: /actuator/health }
+                          route:
+                            cluster: aran_gateway_cluster
+                            timeout: 5s
+                        - match: { prefix: /api/v1/ }
+                          route:
+                            cluster: aran_gateway_cluster
+                            timeout: 10s
+
+  clusters:
+    - name: aran_frontend_cluster
+      connect_timeout: 2s
+      type: STRICT_DNS
+      load_assignment:
+        cluster_name: aran_frontend_cluster
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address: { address: official-website, port_value: 80 }
+
+    - name: aran_gateway_cluster
+      connect_timeout: 2s
+      type: STRICT_DNS
+      load_assignment:
+        cluster_name: aran_gateway_cluster
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address: { address: aran-api-gateway, port_value: 8080 }
+
+    - name: aran_jwks_cluster
+      connect_timeout: 2s
+      type: STRICT_DNS
+      load_assignment:
+        cluster_name: aran_jwks_cluster
+        endpoints:
+          - lb_endpoints:
+              - endpoint:
+                  address:
+                    socket_address: { address: aran-iam-service, port_value: 8081 }

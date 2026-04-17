@@ -1,0 +1,10 @@
+{
+  "cordova-plugin-aran-rasp": {
+    "source": {
+      "type": "registry",
+      "id": "file:../../plugins/cordova-plugin-aran-rasp"
+    },
+    "is_top_level": true,
+    "variables": {}
+  }
+}

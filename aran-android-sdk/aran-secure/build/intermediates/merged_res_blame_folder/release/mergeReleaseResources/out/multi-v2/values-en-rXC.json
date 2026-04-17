@@ -1,0 +1,34 @@
+{
+    "logs": [
+        {
+            "outputFile": "org.mazhai.aran.aran-secure-mergeReleaseResources-7:/values-en-rXC/values-en-rXC.xml",
+            "map": [
+                {
+                    "source": "/Users/dhamo/.gradle/caches/transforms-4/043e712302ecaba71590b4be821d46b3/transformed/core-1.2.0/res/values-en-rXC/values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "203",
+                        "endOffsets": "254"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "org.mazhai.aran.aran-secure-release-9:/values-en-rXC/values-en-rXC.xml",
+            "map": [
+                {
+                    "source": "/Users/dhamo/.gradle/caches/transforms-4/043e712302ecaba71590b4be821d46b3/transformed/core-1.2.0/res/values-en-rXC/values-en-rXC.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "203",
+                        "endOffsets": "254"
+                    }
+                }
+            ]
+        }
+    ]
+}

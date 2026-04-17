@@ -1,0 +1,29 @@
+{
+  "name": "cordova-plugin-aran-security",
+  "version": "1.0.0",
+  "description": "Enterprise mobile security SDK for Cordova with hardware attestation and cloud-managed threat intelligence",
+  "cordova": {
+    "id": "cordova-plugin-aran-security",
+    "platforms": ["android", "ios"]
+  },
+  "keywords": [
+    "cordova",
+    "cordova-plugin",
+    "security",
+    "mobile-security",
+    "threat-detection",
+    "hardware-attestation",
+    "ssl-pinning",
+    "aran",
+    "ecosystem:cordova",
+    "cordova-android",
+    "cordova-ios"
+  ],
+  "author": "Aran Security",
+  "homepage": "https://aran.mazhai.org",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aran-security/cordova-plugin-aran-security.git"
+  },
+  "license": "SEE LICENSE IN LICENSE"
+}

@@ -1,0 +1,450 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A20000001 /* AranEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000010 /* AranEnvironment.swift */; };
+		A20000002 /* ReactionPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000011 /* ReactionPolicy.swift */; };
+		A20000003 /* DeviceStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000012 /* DeviceStatus.swift */; };
+		A20000004 /* AranThreatListener.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000013 /* AranThreatListener.swift */; };
+		A20000005 /* AranRASPEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000014 /* AranRASPEngine.swift */; };
+		A20000006 /* AranEnvironmentalScanner.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000015 /* AranEnvironmentalScanner.swift */; };
+		A20000007 /* AranSigilEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000016 /* AranSigilEngine.swift */; };
+		A20000008 /* AranURLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000017 /* AranURLProtocol.swift */; };
+		A20000009 /* AranSecure.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000018 /* AranSecure.swift */; };
+		A2000000A /* AranCore.c in Sources */ = {isa = PBXBuildFile; fileRef = A20000019A /* AranCore.c */; };
+		A2000000B /* AranObjcChecker.m in Sources */ = {isa = PBXBuildFile; fileRef = A20000019C /* AranObjcChecker.m */; };
+		A2000000C /* AranAppAttest.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000019E /* AranAppAttest.swift */; };
+		A2000000D /* AranRASP.swift in Sources */ = {isa = PBXBuildFile; fileRef = A20000019F /* AranRASP.swift */; };
+		A2000000E /* AranCore.h in Headers */ = {isa = PBXBuildFile; fileRef = A20000019B /* AranCore.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2000000F /* AranObjcChecker.h in Headers */ = {isa = PBXBuildFile; fileRef = A20000019D /* AranObjcChecker.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2000000G /* Aran.h in Headers */ = {isa = PBXBuildFile; fileRef = A20000019 /* Aran.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2000000H /* AranGenesis.c in Sources */ = {isa = PBXBuildFile; fileRef = A2000001A0 /* AranGenesis.c */; };
+		A2000000I /* AranGenesis.h in Headers */ = {isa = PBXBuildFile; fileRef = A2000001A1 /* AranGenesis.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2000000J /* AranPinValidator.c in Sources */ = {isa = PBXBuildFile; fileRef = A2000001A2 /* AranPinValidator.c */; };
+		A2000000K /* AranPinValidator.h in Headers */ = {isa = PBXBuildFile; fileRef = A2000001A3 /* AranPinValidator.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		A2000000L /* AranPhantomSync.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001A4 /* AranPhantomSync.swift */; };
+		A2000000M /* AranScorchedEarth.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2000001A5 /* AranScorchedEarth.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A20000010 /* AranEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranEnvironment.swift; sourceTree = "<group>"; };
+		A20000011 /* ReactionPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReactionPolicy.swift; sourceTree = "<group>"; };
+		A20000012 /* DeviceStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceStatus.swift; sourceTree = "<group>"; };
+		A20000013 /* AranThreatListener.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranThreatListener.swift; sourceTree = "<group>"; };
+		A20000014 /* AranRASPEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranRASPEngine.swift; sourceTree = "<group>"; };
+		A20000015 /* AranEnvironmentalScanner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranEnvironmentalScanner.swift; sourceTree = "<group>"; };
+		A20000016 /* AranSigilEngine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranSigilEngine.swift; sourceTree = "<group>"; };
+		A20000017 /* AranURLProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranURLProtocol.swift; sourceTree = "<group>"; };
+		A20000018 /* AranSecure.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranSecure.swift; sourceTree = "<group>"; };
+		A20000019 /* Aran.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Aran.h; sourceTree = "<group>"; };
+		A20000019A /* AranCore.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AranCore.c; sourceTree = "<group>"; };
+		A20000019B /* AranCore.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AranCore.h; sourceTree = "<group>"; };
+		A20000019C /* AranObjcChecker.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AranObjcChecker.m; sourceTree = "<group>"; };
+		A20000019D /* AranObjcChecker.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AranObjcChecker.h; sourceTree = "<group>"; };
+		A20000019E /* AranAppAttest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranAppAttest.swift; sourceTree = "<group>"; };
+		A20000019F /* AranRASP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranRASP.swift; sourceTree = "<group>"; };
+		A2000001A0 /* AranGenesis.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AranGenesis.c; sourceTree = "<group>"; };
+		A2000001A1 /* AranGenesis.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AranGenesis.h; sourceTree = "<group>"; };
+		A2000001A2 /* AranPinValidator.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = AranPinValidator.c; sourceTree = "<group>"; };
+		A2000001A3 /* AranPinValidator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AranPinValidator.h; sourceTree = "<group>"; };
+		A2000001A4 /* AranPhantomSync.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranPhantomSync.swift; sourceTree = "<group>"; };
+		A2000001A5 /* AranScorchedEarth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AranScorchedEarth.swift; sourceTree = "<group>"; };
+		A20000020 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A20000021 /* Aran.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Aran.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A20000030 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A20000040 /* Aran */ = {
+			isa = PBXGroup;
+			children = (
+				A20000019 /* Aran.h */,
+				A20000020 /* Info.plist */,
+				A20000041 /* Sources */,
+			);
+			path = Aran;
+			sourceTree = "<group>";
+		};
+		A20000041 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				A20000010 /* AranEnvironment.swift */,
+				A20000011 /* ReactionPolicy.swift */,
+				A20000012 /* DeviceStatus.swift */,
+				A20000013 /* AranThreatListener.swift */,
+				A20000014 /* AranRASPEngine.swift */,
+				A20000015 /* AranEnvironmentalScanner.swift */,
+				A20000016 /* AranSigilEngine.swift */,
+				A20000017 /* AranURLProtocol.swift */,
+				A20000018 /* AranSecure.swift */,
+				A20000019A /* AranCore.c */,
+				A20000019B /* AranCore.h */,
+				A20000019C /* AranObjcChecker.m */,
+				A20000019D /* AranObjcChecker.h */,
+				A20000019E /* AranAppAttest.swift */,
+				A20000019F /* AranRASP.swift */,
+				A2000001A0 /* AranGenesis.c */,
+				A2000001A1 /* AranGenesis.h */,
+				A2000001A2 /* AranPinValidator.c */,
+				A2000001A3 /* AranPinValidator.h */,
+				A2000001A4 /* AranPhantomSync.swift */,
+				A2000001A5 /* AranScorchedEarth.swift */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
+		A20000042 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A20000021 /* Aran.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A20000043 = {
+			isa = PBXGroup;
+			children = (
+				A20000040 /* Aran */,
+				A20000042 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		A20000050 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A2000000G /* Aran.h in Headers */,
+				A2000000E /* AranCore.h in Headers */,
+				A2000000F /* AranObjcChecker.h in Headers */,
+				A2000000I /* AranGenesis.h in Headers */,
+				A2000000K /* AranPinValidator.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		A20000060 /* Aran */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A20000061 /* Build configuration list for PBXNativeTarget "Aran" */;
+			buildPhases = (
+				A20000050 /* Headers */,
+				A20000062 /* Sources */,
+				A20000030 /* Frameworks */,
+				A20000063 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Aran;
+			productName = Aran;
+			productReference = A20000021 /* Aran.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A20000070 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					A20000060 = {
+						CreatedOnToolsVersion = 15.0;
+					};
+				};
+			};
+			buildConfigurationList = A20000071 /* Build configuration list for PBXProject "Aran" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = A20000043;
+			productRefGroup = A20000042 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A20000060 /* Aran */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A20000063 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A20000062 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A20000001 /* AranEnvironment.swift in Sources */,
+				A20000002 /* ReactionPolicy.swift in Sources */,
+				A20000003 /* DeviceStatus.swift in Sources */,
+				A20000004 /* AranThreatListener.swift in Sources */,
+				A20000005 /* AranRASPEngine.swift in Sources */,
+				A20000006 /* AranEnvironmentalScanner.swift in Sources */,
+				A20000007 /* AranSigilEngine.swift in Sources */,
+				A20000008 /* AranURLProtocol.swift in Sources */,
+				A20000009 /* AranSecure.swift in Sources */,
+				A2000000A /* AranCore.c in Sources */,
+				A2000000B /* AranObjcChecker.m in Sources */,
+				A2000000C /* AranAppAttest.swift in Sources */,
+				A2000000D /* AranRASP.swift in Sources */,
+				A2000000H /* AranGenesis.c in Sources */,
+				A2000000J /* AranPinValidator.c in Sources */,
+				A2000000L /* AranPhantomSync.swift in Sources */,
+				A2000000M /* AranScorchedEarth.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		A20000080 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		A20000081 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		A20000082 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Aran/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Mazhai Technologies";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = org.mazhai.aran;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		A20000083 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = "";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_MODULE_VERIFIER = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Aran/Info.plist;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "Copyright © 2024 Mazhai Technologies";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				MODULE_VERIFIER_SUPPORTED_LANGUAGES = "objective-c objective-c++";
+				MODULE_VERIFIER_SUPPORTED_LANGUAGE_STANDARDS = "gnu17 gnu++20";
+				PRODUCT_BUNDLE_IDENTIFIER = org.mazhai.aran;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				SUPPORTS_MACCATALYST = NO;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A20000061 /* Build configuration list for PBXNativeTarget "Aran" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A20000082 /* Debug */,
+				A20000083 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A20000071 /* Build configuration list for PBXProject "Aran" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A20000080 /* Debug */,
+				A20000081 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A20000070 /* Project object */;
+}

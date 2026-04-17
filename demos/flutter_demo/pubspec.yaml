@@ -1,0 +1,23 @@
+name: flutter_rasp_demo
+description: ARAN RASP Flutter Plugin Demo Application
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  # Local plugin dependency for development
+  # In production, this would be published to pub.dev
+  aran_rasp:
+    path: ../../plugins/flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true

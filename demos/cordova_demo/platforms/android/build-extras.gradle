@@ -1,0 +1,17 @@
+// Add Nexus Maven repository for AAR
+repositories {
+    maven {
+        url = "https://maven.mazhai.org/nexus/repository/aran-demobank/"
+        credentials {
+            username = "admin"
+            password = "DS@n#2k22"
+        }
+    }
+}
+
+// Add ARAN RASP AAR dependency from Nexus
+android {
+    dependencies {
+        implementation 'org.mazhai.aran:aran-secure:1.0.0'
+    }
+}

@@ -1,0 +1,26 @@
+<?xml version='1.0' encoding='utf-8'?>
+<widget id="com.aran.cordova.rasp.demo" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+    <name>ARAN RASP Demo</name>
+    <description>ARAN RASP Cordova Demo Application</description>
+    <author email="security@aran.com">ARAN Security</author>
+    
+    <content src="index.html" />
+    
+    <access origin="*" />
+    
+    <preference name="Orientation" value="default" />
+    <preference name="Fullscreen" value="false" />
+    <preference name="BackgroundColor" value="0xffffffff" />
+    
+    <platform name="android">
+        <preference name="android-minSdkVersion" value="21" />
+        <preference name="android-targetSdkVersion" value="34" />
+    </platform>
+    
+    <platform name="ios">
+        <preference name="deployment-target" value="12.0" />
+    </platform>
+    
+    <!-- ARAN RASP Plugin -->
+    <plugin name="cordova-rasp" spec="../../plugins/cordova_capacitor/cordova" />
+</widget>
