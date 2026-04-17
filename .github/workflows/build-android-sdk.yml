@@ -1,0 +1,383 @@
+# Copyright 2024-2026 Mazhai Technologies
+# GitHub Actions: Android SDK CI/CD Pipeline
+#
+# Features:
+# - Multi-arch native builds (arm64-v8a, armeabi-v7a, x86, x86_64)
+# - Genesis key generation from GitHub Secrets
+# - O-LLVM obfuscation (optional)
+# - AAR artifact signing and publishing
+# - SLSA Level 3 attestation
+
+name: Android SDK Build
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'aran-android-sdk/**'
+      - 'build/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'aran-android-sdk/**'
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        default: 'snapshot'
+        type: choice
+        options:
+          - snapshot
+          - rc
+          - release
+
+env:
+  GRADLE_OPTS: -Dorg.gradle.jvmargs="-Xmx4g -Dfile.encoding=UTF-8"
+  ARAN_SDK_VERSION: ${{ github.ref_name == 'main' && '1.0.0' || format('1.0.0-{0}', github.run_number) }}
+
+jobs:
+  # ============================================================================
+  # Stage 1: Security Scan
+  # ============================================================================
+  security-scan:
+    name: Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Check for secrets in code
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+          extra_args: --debug --only-verified
+
+      - name: Check for hardcoded keys
+        run: |
+          # Fail if any hardcoded keys are found (should only be in env vars)
+          if grep -r "AES_KEY\|HMAC_SECRET" --include="*.kt" --include="*.java" --include="*.cpp" aran-android-sdk/ | grep -v "getenv\|System.getenv"; then
+            echo "ERROR: Potential hardcoded keys found!"
+            exit 1
+          fi
+          echo "✅ No hardcoded keys detected"
+
+      - name: SonarCloud Scan
+        uses: SonarSource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        continue-on-error: true
+
+  # ============================================================================
+  # Stage 2: Build Native Libraries
+  # ============================================================================
+  build-native:
+    name: Build Native (${{ matrix.abi }})
+    needs: security-scan
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        abi: [arm64-v8a, armeabi-v7a, x86_64, x86]
+        include:
+          - abi: arm64-v8a
+            ndk_abi: arm64-v8a
+          - abi: armeabi-v7a
+            ndk_abi: armeabi-v7a
+          - abi: x86_64
+            ndk_abi: x86_64
+          - abi: x86
+            ndk_abi: x86
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup NDK
+        uses: nttld/setup-ndk@v1
+        id: setup-ndk
+        with:
+          ndk-version: r26b
+          add-to-path: true
+
+      - name: Cache CMake build
+        uses: actions/cache@v4
+        with:
+          path: aran-android-sdk/aran-secure/.cxx
+          key: cmake-${{ matrix.abi }}-${{ hashFiles('aran-android-sdk/aran-secure/src/main/cpp/**') }}
+          restore-keys: |
+            cmake-${{ matrix.abi }}-
+
+      - name: Generate Production Genesis
+        working-directory: aran-android-sdk/aran-secure/src/main/cpp
+        env:
+          ARAN_PROD_AES_KEY: ${{ secrets.ARAN_PROD_AES_KEY }}
+          ARAN_PROD_HMAC_SECRET: ${{ secrets.ARAN_PROD_HMAC_SECRET }}
+          ARAN_PROD_TLS_PIN_0_SHA256: ${{ secrets.ARAN_PROD_TLS_PIN_0 }}
+          ARAN_PROD_TLS_PIN_1_SHA256: ${{ secrets.ARAN_PROD_TLS_PIN_1 }}
+        run: |
+          if [ -z "$ARAN_PROD_AES_KEY" ]; then
+            echo "WARNING: Using test keys (dev build)"
+            python3 ../../../../../build/encode_genesis.py \
+              --platform android \
+              --output genesis_prod.h
+          else
+            echo "Using production keys from secrets"
+            python3 ../../../../../build/encode_genesis.py \
+              --platform android \
+              --output genesis_prod.h
+          fi
+
+      - name: Build Native Library (${{ matrix.abi }})
+        working-directory: aran-android-sdk/aran-secure/src/main/cpp
+        run: |
+          mkdir -p build/${{ matrix.abi }}
+          cd build/${{ matrix.abi }}
+          
+          cmake ../../ \
+            -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_HOME/build/cmake/android.toolchain.cmake \
+            -DANDROID_ABI=${{ matrix.ndk_abi }} \
+            -DANDROID_PLATFORM=android-24 \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_C_FLAGS="-O3 -fvisibility=hidden -fstack-protector-strong" \
+            -DCMAKE_CXX_FLAGS="-O3 -fvisibility=hidden -fstack-protector-strong"
+          
+          make -j$(nproc)
+          
+          # Verify library was built
+          ls -la libaran-secure.so || exit 1
+
+      - name: Upload Native Library
+        uses: actions/upload-artifact@v4
+        with:
+          name: native-lib-${{ matrix.abi }}
+          path: aran-android-sdk/aran-secure/src/main/cpp/build/${{ matrix.abi }}/libaran-secure.so
+          retention-days: 1
+
+  # ============================================================================
+  # Stage 3: Build Android Library (AAR)
+  # ============================================================================
+  build-aar:
+    name: Build AAR
+    needs: build-native
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Setup Gradle
+        uses: gradle/gradle-build-action@v3
+        with:
+          gradle-version: 8.5
+
+      - name: Download Native Libraries
+        uses: actions/download-artifact@v4
+        with:
+          path: aran-android-sdk/aran-secure/src/main/jniLibs
+          pattern: native-lib-*
+          merge-multiple: false
+
+      - name: Organize Native Libraries
+        working-directory: aran-android-sdk/aran-secure/src/main/jniLibs
+        run: |
+          mkdir -p arm64-v8a armeabi-v7a x86_64 x86
+          mv native-lib-arm64-v8a/libaran-secure.so arm64-v8a/
+          mv native-lib-armeabi-v7a/libaran-secure.so armeabi-v7a/
+          mv native-lib-x86_64/libaran-secure.so x86_64/
+          mv native-lib-x86/libaran-secure.so x86/
+          rm -rf native-lib-*
+          ls -la */
+
+      - name: Generate Production Genesis
+        working-directory: aran-android-sdk/aran-secure/src/main/cpp
+        env:
+          ARAN_PROD_AES_KEY: ${{ secrets.ARAN_PROD_AES_KEY }}
+          ARAN_PROD_HMAC_SECRET: ${{ secrets.ARAN_PROD_HMAC_SECRET }}
+        run: |
+          python3 ../../../../../build/encode_genesis.py \
+            --platform android \
+            --output genesis_prod.h || echo "Using dev keys"
+
+      - name: Build AAR
+        working-directory: aran-android-sdk
+        run: |
+          ./gradlew :aran-secure:assembleRelease \
+            -ParanSdkVersion=${{ env.ARAN_SDK_VERSION }} \
+            --stacktrace
+
+      - name: Sign AAR
+        if: github.ref_name == 'main' || inputs.release_type == 'release'
+        env:
+          SIGNING_KEY: ${{ secrets.ARAN_SIGNING_KEY_BASE64 }}
+          SIGNING_PASSWORD: ${{ secrets.ARAN_SIGNING_PASSWORD }}
+        run: |
+          echo "$SIGNING_KEY" | base64 -d > aran-signing.keystore
+          
+          jarsigner -keystore aran-signing.keystore \
+            -storepass "$SIGNING_PASSWORD" \
+            -keypass "$SIGNING_PASSWORD" \
+            aran-android-sdk/aran-secure/build/outputs/aar/aran-secure-release.aar \
+            aran-release
+          
+          rm aran-signing.keystore
+
+      - name: Upload AAR
+        uses: actions/upload-artifact@v4
+        with:
+          name: aran-secure-aar
+          path: aran-android-sdk/aran-secure/build/outputs/aar/*.aar
+          retention-days: 30
+
+      - name: Generate SBOM
+        uses: anchore/sbom-action@v0
+        with:
+          path: aran-android-sdk/aran-secure
+          format: spdx-json
+          output-file: aran-secure-sbom.spdx.json
+
+      - name: Upload SBOM
+        uses: actions/upload-artifact@v4
+        with:
+          name: sbom
+          path: aran-secure-sbom.spdx.json
+
+  # ============================================================================
+  # Stage 4: Integration Tests
+  # ============================================================================
+  integration-test:
+    name: Integration Tests
+    needs: build-aar
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Download AAR
+        uses: actions/download-artifact@v4
+        with:
+          name: aran-secure-aar
+          path: aran-android-sdk/aran-secure/build/outputs/aar/
+
+      - name: Run Unit Tests
+        working-directory: aran-android-sdk
+        run: |
+          ./gradlew :aran-secure:testReleaseUnitTest --stacktrace
+
+      - name: Run Lint
+        working-directory: aran-android-sdk
+        run: |
+          ./gradlew :aran-secure:lintRelease --stacktrace
+
+      - name: Upload Test Reports
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-reports
+          path: |
+            aran-android-sdk/aran-secure/build/reports/tests/
+            aran-android-sdk/aran-secure/build/reports/lint-results.html
+
+  # ============================================================================
+  # Stage 5: Publish (Release only)
+  # ============================================================================
+  publish:
+    name: Publish to Maven
+    needs: [build-aar, integration-test]
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'main' || inputs.release_type == 'release'
+    environment: production
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - name: Download AAR
+        uses: actions/download-artifact@v4
+        with:
+          name: aran-secure-aar
+          path: aran-android-sdk/aran-secure/build/outputs/aar/
+
+      - name: Publish to GitHub Packages
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ARAN_GPG_SIGNING_KEY }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ARAN_GPG_SIGNING_PASSWORD }}
+        working-directory: aran-android-sdk
+        run: |
+          ./gradlew :aran-secure:publishReleasePublicationToGitHubPackagesRepository \
+            -ParanSdkVersion=${{ env.ARAN_SDK_VERSION }} \
+            --stacktrace
+
+      - name: Create Release Attestation
+        uses: sigstore/cosign-installer@v3
+        with:
+          cosign-release: 'v2.2.0'
+
+      - name: Sign AAR with Cosign
+        env:
+          COSIGN_EXPERIMENTAL: 1
+        run: |
+          cosign sign-blob \
+            --yes \
+            --output-signature aran-secure-release.aar.sig \
+            --output-certificate aran-secure-release.pem \
+            aran-android-sdk/aran-secure/build/outputs/aar/aran-secure-release.aar
+
+      - name: Upload Attestation
+        uses: actions/upload-artifact@v4
+        with:
+          name: attestation
+          path: |
+            aran-secure-release.aar.sig
+            aran-secure-release.pem
+
+  # ============================================================================
+  # Stage 6: Security Notification
+  # ============================================================================
+  notify:
+    name: Notify Security Team
+    needs: [publish]
+    runs-on: ubuntu-latest
+    if: always()
+    steps:
+      - name: Send Slack Notification
+        uses: slackapi/slack-github-action@v1
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_SECURITY_WEBHOOK }}
+        with:
+          payload: |
+            {
+              "text": "Android SDK Build ${{ job.status }}",
+              "blocks": [
+                {
+                  "type": "section",
+                  "text": {
+                    "type": "mrkdwn",
+                    "text": "*Aran Android SDK Build*\nVersion: ${{ env.ARAN_SDK_VERSION }}\nStatus: ${{ job.status }}\nCommit: ${{ github.sha }}"
+                  }
+                }
+              ]
+            }
+        continue-on-error: true

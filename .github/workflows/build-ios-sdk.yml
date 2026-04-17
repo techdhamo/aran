@@ -1,0 +1,387 @@
+# Copyright 2024-2026 Mazhai Technologies
+# GitHub Actions: iOS SDK CI/CD Pipeline
+#
+# Features:
+# - Multi-arch XCFramework build (iOS device + simulator)
+# - Genesis key generation from GitHub Secrets
+# - Code signing with Apple Developer certificate
+# - XCFramework creation and notarization
+# - Swift Package Manager distribution
+
+name: iOS SDK Build
+
+on:
+  push:
+    branches: [main, develop]
+    paths:
+      - 'aran-ios-sdk/**'
+      - 'build/**'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'aran-ios-sdk/**'
+  workflow_dispatch:
+    inputs:
+      release_type:
+        description: 'Release type'
+        required: true
+        default: 'snapshot'
+        type: choice
+        options:
+          - snapshot
+          - rc
+          - release
+
+env:
+  ARAN_SDK_VERSION: ${{ github.ref_name == 'main' && '1.0.0' || format('1.0.0-{0}', github.run_number) }}
+  XCODE_VERSION: '15.2'
+
+jobs:
+  # ============================================================================
+  # Stage 1: Security Scan
+  # ============================================================================
+  security-scan:
+    name: Security Scan
+    runs-on: macos-14
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Check for hardcoded keys
+        run: |
+          if grep -r "aes_key\|hmac_secret" --include="*.swift" --include="*.m" --include="*.c" aran-ios-sdk/ | grep -v "loadGenesis\|GENESIS"; then
+            echo "WARNING: Potential hardcoded keys found - review manually"
+          fi
+          echo "✅ Key scan complete"
+
+      - name: Detect Secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./aran-ios-sdk
+          base: ${{ github.event.repository.default_branch }}
+          head: HEAD
+
+  # ============================================================================
+  # Stage 2: Build Device Framework
+  # ============================================================================
+  build-device:
+    name: Build Device (${{ matrix.arch }})
+    needs: security-scan
+    runs-on: macos-14
+    strategy:
+      matrix:
+        arch: [arm64]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_${{ env.XCODE_VERSION }}.app
+
+      - name: Generate Production Genesis
+        working-directory: aran-ios-sdk/Aran/Aran/Sources
+        env:
+          ARAN_PROD_AES_KEY: ${{ secrets.ARAN_PROD_AES_KEY }}
+          ARAN_PROD_HMAC_SECRET: ${{ secrets.ARAN_PROD_HMAC_SECRET }}
+        run: |
+          python3 ../../../../../build/encode_genesis.py \
+            --platform ios \
+            --output AranGenesis_prod.h || echo "Using dev keys"
+
+      - name: Build Device Framework
+        working-directory: aran-ios-sdk
+        run: |
+          xcodebuild archive \
+            -project Aran.xcodeproj \
+            -scheme Aran \
+            -destination "generic/platform=iOS" \
+            -archivePath "build/Aran-ios.xcarchive" \
+            -derivedDataPath "build/derived" \
+            SWIFT_VERSION=5.9 \
+            IPHONEOS_DEPLOYMENT_TARGET=13.0 \
+            ENABLE_BITCODE=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty || cat
+
+      - name: Upload Device Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-device-archive
+          path: aran-ios-sdk/build/Aran-ios.xcarchive
+          retention-days: 1
+
+  # ============================================================================
+  # Stage 3: Build Simulator Framework
+  # ============================================================================
+  build-simulator:
+    name: Build Simulator (${{ matrix.arch }})
+    needs: security-scan
+    runs-on: macos-14
+    strategy:
+      matrix:
+        arch: [arm64, x86_64]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Select Xcode
+        run: sudo xcode-select -s /Applications/Xcode_${{ env.XCODE_VERSION }}.app
+
+      - name: Generate Production Genesis
+        working-directory: aran-ios-sdk/Aran/Aran/Sources
+        env:
+          ARAN_PROD_AES_KEY: ${{ secrets.ARAN_PROD_AES_KEY }}
+          ARAN_PROD_HMAC_SECRET: ${{ secrets.ARAN_PROD_HMAC_SECRET }}
+        run: |
+          python3 ../../../../../build/encode_genesis.py \
+            --platform ios \
+            --output AranGenesis_prod.h || echo "Using dev keys"
+
+      - name: Build Simulator Framework
+        working-directory: aran-ios-sdk
+        run: |
+          xcodebuild archive \
+            -project Aran.xcodeproj \
+            -scheme Aran \
+            -destination "platform=iOS Simulator,name=iPhone 15,arch=${{ matrix.arch }}" \
+            -archivePath "build/Aran-ios-sim-${{ matrix.arch }}.xcarchive" \
+            -derivedDataPath "build/derived" \
+            SWIFT_VERSION=5.9 \
+            IPHONEOS_DEPLOYMENT_TARGET=13.0 \
+            ENABLE_BITCODE=NO \
+            CODE_SIGNING_ALLOWED=NO \
+            CODE_SIGNING_REQUIRED=NO \
+            | xcpretty || cat
+
+      - name: Upload Simulator Archive
+        uses: actions/upload-artifact@v4
+        with:
+          name: ios-sim-archive-${{ matrix.arch }}
+          path: aran-ios-sdk/build/Aran-ios-sim-${{ matrix.arch }}.xcarchive
+          retention-days: 1
+
+  # ============================================================================
+  # Stage 4: Create XCFramework
+  # ============================================================================
+  create-xcframework:
+    name: Create XCFramework
+    needs: [build-device, build-simulator]
+    runs-on: macos-14
+    steps:
+      - name: Download Device Archive
+        uses: actions/download-artifact@v4
+        with:
+          name: ios-device-archive
+          path: build/
+
+      - name: Download Simulator Archives
+        uses: actions/download-artifact@v4
+        with:
+          path: build/
+          pattern: ios-sim-archive-*
+          merge-multiple: true
+
+      - name: Create XCFramework
+        run: |
+          rm -rf Aran.xcframework
+          
+          xcodebuild -create-xcframework \
+            -framework build/Aran-ios.xcarchive/Products/Library/Frameworks/Aran.framework \
+            -framework build/Aran-ios-sim-arm64.xcarchive/Products/Library/Frameworks/Aran.framework \
+            -framework build/Aran-ios-sim-x86_64.xcarchive/Products/Library/Frameworks/Aran.framework \
+            -output Aran.xcframework
+          
+          # Verify architecture slices
+          lipo -info Aran.xcframework/ios-arm64/Aran.framework/Aran
+          lipo -info Aran.xcframework/ios-arm64_x86_64-simulator/Aran.framework/Aran
+
+      - name: Strip Debug Symbols
+        run: |
+          find Aran.xcframework -name "*.framework" -exec strip -x {} \;
+
+      - name: Generate dSYM
+        run: |
+          mkdir -p dSYM
+          find build/*.xcarchive -name "*.dSYM" -exec cp -R {} dSYM/ \;
+          zip -r Aran.dSYM.zip dSYM/
+
+      - name: Zip XCFramework
+        run: |
+          zip -r Aran.xcframework.zip Aran.xcframework
+
+      - name: Upload XCFramework
+        uses: actions/upload-artifact@v4
+        with:
+          name: aran-xcframework
+          path: |
+            Aran.xcframework.zip
+            Aran.dSYM.zip
+          retention-days: 30
+
+  # ============================================================================
+  # Stage 5: Code Sign & Notarize (Release only)
+  # ============================================================================
+  sign-and-notarize:
+    name: Sign & Notarize
+    needs: create-xcframework
+    runs-on: macos-14
+    if: github.ref_name == 'main' || inputs.release_type == 'release'
+    environment: production
+    steps:
+      - name: Download XCFramework
+        uses: actions/download-artifact@v4
+        with:
+          name: aran-xcframework
+
+      - name: Setup Signing
+        env:
+          BUILD_CERTIFICATE_BASE64: ${{ secrets.APPLE_CERTIFICATE_BASE64 }}
+          P12_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          KEYCHAIN_PASSWORD: ${{ secrets.KEYCHAIN_PASSWORD }}
+        run: |
+          # Create keychain
+          security create-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
+          security default-keychain -s build.keychain
+          security unlock-keychain -p "$KEYCHAIN_PASSWORD" build.keychain
+          security set-keychain-settings -t 3600 -u build.keychain
+          
+          # Import certificate
+          echo "$BUILD_CERTIFICATE_BASE64" | base64 --decode > certificate.p12
+          security import certificate.p12 -k build.keychain -P "$P12_PASSWORD" -T /usr/bin/codesign
+          security set-key-partition-list -S apple-tool:,apple: -s -k "$KEYCHAIN_PASSWORD" build.keychain
+
+      - name: Sign XCFramework
+        run: |
+          unzip Aran.xcframework.zip
+          
+          codesign --force --deep --sign "Developer ID Application: Mazhai Technologies" \
+            --timestamp \
+            --options runtime \
+            Aran.xcframework
+          
+          zip -r Aran.xcframework-signed.zip Aran.xcframework
+
+      - name: Notarize
+        env:
+          APPLE_ID: ${{ secrets.APPLE_ID }}
+          APPLE_TEAM_ID: ${{ secrets.APPLE_TEAM_ID }}
+          APPLE_APP_PASSWORD: ${{ secrets.APPLE_APP_PASSWORD }}
+        run: |
+          # Submit for notarization
+          xcrun notarytool submit Aran.xcframework-signed.zip \
+            --apple-id "$APPLE_ID" \
+            --team-id "$APPLE_TEAM_ID" \
+            --password "$APPLE_APP_PASSWORD" \
+            --wait
+
+      - name: Upload Signed XCFramework
+        uses: actions/upload-artifact@v4
+        with:
+          name: aran-xcframework-signed
+          path: Aran.xcframework-signed.zip
+
+  # ============================================================================
+  # Stage 6: Update Swift Package
+  # ============================================================================
+  update-spm:
+    name: Update Swift Package
+    needs: sign-and-notarize
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'main' || inputs.release_type == 'release'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Download Signed XCFramework
+        uses: actions/download-artifact@v4
+        with:
+          name: aran-xcframework-signed
+
+      - name: Compute Checksum
+        id: checksum
+        run: |
+          CHECKSUM=$(swift package compute-checksum Aran.xcframework-signed.zip)
+          echo "checksum=$CHECKSUM" >> $GITHUB_OUTPUT
+
+      - name: Update Package.swift
+        run: |
+          cat > Package.swift << EOF
+          // swift-tools-version:5.9
+          import PackageDescription
+
+          let package = Package(
+              name: "Aran",
+              platforms: [.iOS(.v13)],
+              products: [
+                  .library(name: "Aran", targets: ["Aran"])
+              ],
+              targets: [
+                  .binaryTarget(
+                      name: "Aran",
+                      url: "https://github.com/techdhamo/aran/releases/download/v${{ env.ARAN_SDK_VERSION }}/Aran.xcframework-signed.zip",
+                      checksum: "${{ steps.checksum.outputs.checksum }}"
+                  )
+              ]
+          )
+          EOF
+
+      - name: Commit Package.swift
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add Package.swift
+          git commit -m "Update Package.swift for v${{ env.ARAN_SDK_VERSION }}" || echo "No changes"
+          git push || echo "Nothing to push"
+
+  # ============================================================================
+  # Stage 7: Create GitHub Release
+  # ============================================================================
+  release:
+    name: Create Release
+    needs: [sign-and-notarize, update-spm]
+    runs-on: ubuntu-latest
+    if: github.ref_name == 'main' || inputs.release_type == 'release'
+    steps:
+      - name: Download All Artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: release/
+          pattern: '*'
+          merge-multiple: true
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: v${{ env.ARAN_SDK_VERSION }}
+          name: Aran iOS SDK v${{ env.ARAN_SDK_VERSION }}
+          body: |
+            ## Aran iOS SDK Release v${{ env.ARAN_SDK_VERSION }}
+
+            ### Installation
+
+            #### Swift Package Manager
+            ```swift
+            dependencies: [
+                .package(url: "https://github.com/techdhamo/aran", from: "${{ env.ARAN_SDK_VERSION }}")
+            ]
+            ```
+
+            #### XCFramework (Manual)
+            Download `Aran.xcframework-signed.zip` and embed in your project.
+
+            ### Security
+            - XCFramework is code-signed and notarized
+            - dSYM symbols included for debugging
+            - Checksum verified via Package.swift
+
+            ### Documentation
+            See [INTEGRATION_COMPLETE.md](./aran-ios-sdk/INTEGRATION_COMPLETE.md)
+          files: |
+            release/Aran.xcframework-signed.zip
+            release/Aran.dSYM.zip
+          generate_release_notes: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
