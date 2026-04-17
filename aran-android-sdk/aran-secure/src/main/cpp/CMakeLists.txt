@@ -9,6 +9,7 @@ add_library(
         aran-core.cpp
         aran_genesis.cpp
         aran_pin_validator.cpp
+        aran_scorched_earth.cpp
         anti_frida.cpp
         advanced_anti_frida.cpp
         rasp_defense.cpp

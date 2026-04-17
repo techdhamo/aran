@@ -39,4 +39,10 @@ class AranNative {
     // Called after a successful QUIC sync with mazhai-central.
     // Pins are already in blinded form (SHA256(salt || pin_hash)).
     external fun updateDynamicPins(pin0Blinded: ByteArray, pin1Blinded: ByteArray)
+
+    // Scorched Earth: Sets the native compromised flag.
+    // Once set, all native network operations return errors.
+    // This is the SEVER phase — irreversible for this process lifetime.
+    @JvmStatic
+    external fun setCompromisedFlag()
 }

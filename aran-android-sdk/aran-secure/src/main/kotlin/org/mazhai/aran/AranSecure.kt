@@ -28,7 +28,7 @@ import org.mazhai.aran.internal.AranSyncEngine
 import org.mazhai.aran.internal.TelemetryClient
 import org.json.JSONObject
 import java.util.UUID
-import kotlin.system.exitProcess
+import org.mazhai.aran.security.AranScorchedEarth
 
 object AranSecure {
 
@@ -169,7 +169,8 @@ object AranSecure {
         Log.e(TAG, "MITM KILL: $reason")
         val status = if (initialized) checkEnvironment() else return
         threatListener?.onThreatDetected(status, "KILL_APP")
-        exitProcess(0)
+        // Scorched Earth: Wipe secrets, blackhole network, freeze UI
+        AranScorchedEarth.execute(applicationContext, "MITM detected: $reason")
     }
 
     // ── Internal: Allow native listener registration (for hybrid bridges) ──
@@ -389,7 +390,8 @@ object AranSecure {
                 .setCancelable(false)
                 .setPositiveButton("OK") { _, _ ->
                     if (shouldKill) {
-                        exitProcess(0)
+                        // Scorched Earth: Wipe secrets, blackhole network, freeze UI
+                        AranScorchedEarth.execute(activity.applicationContext, "Threat detected: KILL_APP policy")
                     }
                 }
                 .show()
