@@ -1,5 +1,6 @@
 package org.mazhai.central.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import jakarta.validation.constraints.NotBlank;
@@ -8,6 +9,8 @@ import jakarta.validation.constraints.NotBlank;
 public record TelemetryPayload(
         @NotBlank String deviceFingerprint,
         @NotBlank String appId,
-        boolean isRooted
+        boolean isRooted,
+        @JsonProperty("frida_detected") boolean fridaDetected,
+        @JsonProperty("debugger_attached") boolean debuggerAttached
 ) {
 }

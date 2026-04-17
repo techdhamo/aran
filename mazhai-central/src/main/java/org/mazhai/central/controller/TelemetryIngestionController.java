@@ -17,6 +17,14 @@ public class TelemetryIngestionController {
     @PostMapping("/api/v1/telemetry/ingest")
     public ResponseEntity<Void> ingest(@Valid @RequestBody TelemetryPayload payload) {
         log.info("Loom-Check isVirtual: {}", Thread.currentThread().isVirtual());
+        log.info(
+                "signals appId={} deviceFingerprint={} rooted={} fridaDetected={} debuggerAttached={} ",
+                payload.appId(),
+                payload.deviceFingerprint(),
+                payload.isRooted(),
+                payload.fridaDetected(),
+                payload.debuggerAttached()
+        );
         return ResponseEntity.accepted().build();
     }
 }

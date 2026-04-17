@@ -1,0 +1,38 @@
+{
+  "buildFiles": [
+    "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/CMakeLists.txt"
+  ],
+  "cleanCommandsComponents": [
+    [
+      "/Users/dhamo/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+      "-C",
+      "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/Debug/5b2le6t6/arm64-v8a",
+      "clean"
+    ]
+  ],
+  "buildTargetsCommandComponents": [
+    "/Users/dhamo/Library/Android/sdk/cmake/3.22.1/bin/ninja",
+    "-C",
+    "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/Debug/5b2le6t6/arm64-v8a",
+    "{LIST_OF_TARGETS_TO_BUILD}"
+  ],
+  "libraries": {
+    "aran-secure::@6890427a1f51a3e7e1df": {
+      "toolchain": "toolchain",
+      "abi": "arm64-v8a",
+      "artifactName": "aran-secure",
+      "output": "/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/cxx/Debug/5b2le6t6/obj/arm64-v8a/libaran-secure.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "toolchain": {
+      "cCompilerExecutable": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang.lld",
+      "cppCompilerExecutable": "/Users/dhamo/Library/Android/sdk/ndk/26.1.10909125/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++.lld"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

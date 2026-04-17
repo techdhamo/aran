@@ -1,4 +1,9 @@
 {
     "java.configuration.updateBuildConfiguration": "interactive",
-    "java.jdt.ls.java.home": "/opt/homebrew/Cellar/openjdk@21/21.0.8/libexec/openjdk.jdk/Contents/Home"
+    "java.jdt.ls.java.home": "/opt/homebrew/Cellar/openjdk@21/21.0.8/libexec/openjdk.jdk/Contents/Home",
+    "files.associations": {
+        "aranobfuscate.h": "c",
+        "sstream": "cpp",
+        "regex": "cpp"
+    }
 }

@@ -1,0 +1,18 @@
+# ninja log v5
+3	1067	1776191972805777595	CMakeFiles/aran-secure.dir/aran_genesis.cpp.o	c28f90a092b25c1b
+4	2192	1776191973927132103	CMakeFiles/aran-secure.dir/anti_frida.cpp.o	33a27ca3de3d4e7d
+2	491	1776192252755395165	CMakeFiles/aran-secure.dir/advanced_anti_frida.cpp.o	82a8963867bc3da9
+8	1576	1776191973300821986	CMakeFiles/aran-secure.dir/advanced_rasp_defense.cpp.o	b60d914b8735f5b7
+3	1401	1776192238326383586	CMakeFiles/aran-secure.dir/rasp_core_engine.cpp.o	5da72153fe6825d3
+3	3634	1776191975368046663	CMakeFiles/aran-secure.dir/aran-core.cpp.o	166e5ed6b123cebc
+6	853	1776191972591834952	CMakeFiles/aran-secure.dir/rasp_defense.cpp.o	69d09ecf327251f0
+3	594	1776191972332280074	CMakeFiles/aran-secure.dir/aran_pin_validator.cpp.o	5122225490b9fb12
+492	801	1776192253046213458	/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/cxx/RelWithDebInfo/3l6z5c2p/obj/arm64-v8a/libaran-secure.so	ba900ad7067722f9
+2	1560	1776200319726885332	CMakeFiles/aran-secure.dir/aran-core.cpp.o	166e5ed6b123cebc
+1560	1810	1776200319964225280	/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/cxx/RelWithDebInfo/3l6z5c2p/obj/arm64-v8a/libaran-secure.so	ba900ad7067722f9
+2	1633	1776200842706104454	CMakeFiles/aran-secure.dir/aran-core.cpp.o	166e5ed6b123cebc
+1633	1993	1776200843066537954	/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/cxx/RelWithDebInfo/3l6z5c2p/obj/arm64-v8a/libaran-secure.so	ba900ad7067722f9
+3	1657	1776201889009349898	CMakeFiles/aran-secure.dir/aran-core.cpp.o	166e5ed6b123cebc
+1657	1742	1776201889096781720	/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/cxx/RelWithDebInfo/3l6z5c2p/obj/arm64-v8a/libaran-secure.so	ba900ad7067722f9
+4	1290	1776202004971120064	CMakeFiles/aran-secure.dir/aran-core.cpp.o	166e5ed6b123cebc
+1290	1378	1776202005056715709	/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/cxx/RelWithDebInfo/3l6z5c2p/obj/arm64-v8a/libaran-secure.so	ba900ad7067722f9

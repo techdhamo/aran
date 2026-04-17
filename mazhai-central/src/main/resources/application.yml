@@ -3,8 +3,8 @@ spring:
     name: org.mazhai.central
   datasource:
     url: jdbc:postgresql://localhost:5432/mazhai_central
-    username: mazhai_admin
-    password: "AranSecure2026!"
+    username: ${DB_USERNAME:mazhai_admin}
+    password: ${DB_PASSWORD}
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
@@ -16,3 +16,18 @@ spring:
 
 server:
   port: 33100
+  ssl:
+    enabled: true
+    protocol: TLS
+    enabled-protocols: TLSv1.3,TLSv1.2
+    ciphers: TLS_AES_256_GCM_SHA384,TLS_AES_128_GCM_SHA256,TLS_CHACHA20_POLY1305_SHA256
+    key-store: ${SSL_KEYSTORE:classpath:keystore.p12}
+    key-store-password: ${SSL_KEYSTORE_PASSWORD}
+    key-store-type: PKCS12
+    key-alias: ${SSL_KEY_ALIAS:aran-central}
+
+# E2EE keys — PRODUCTION: inject via environment variables or vault
+aran:
+  crypto:
+    aes-key: ${ARAN_AES_KEY:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=}
+    hmac-secret: ${ARAN_HMAC_SECRET:BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB}

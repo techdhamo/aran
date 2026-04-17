@@ -8,6 +8,18 @@ import jakarta.validation.constraints.NotNull;
 import java.util.List;
 
 public record TelemetryPayload(
+        @JsonProperty("request_id")
+        @NotBlank
+        String requestId,
+
+        @JsonProperty("rasp_version")
+        @NotBlank
+        String raspVersion,
+
+        @JsonProperty("os_type")
+        @NotBlank
+        String osType,
+
         @JsonProperty("device_fingerprint")
         @NotBlank
         String deviceFingerprint,
