@@ -1,16 +1,19 @@
 #include <jni.h>
 #include <android/log.h>
-#include <unistd.h>
-#include <sys/ptrace.h>
-#include <sys/mman.h>
-#include <dlfcn.h>
-#include <dirent.h>
-#include <fstream>
 #include <string>
 #include <vector>
 #include <chrono>
 #include <thread>
-#include <signal.h>
+#include <dlfcn.h>
+#include <unistd.h>
+#include <sys/mman.h>
+#include <sys/syscall.h>
+#include <link.h>
+#include <pthread.h>
+#include <atomic>
+#include <cstring>
+#include <algorithm>
+#include <inttypes.h>
 #include <sys/syscall.h>
 #include <sys/prctl.h>
 
@@ -184,7 +187,7 @@ static bool perform_timing_attack() {
     
     // If execution takes unusually long, likely being debugged/instrumented
     if (duration.count() > 100000) { // 100ms threshold
-        LOGE("Timing attack detected: %ld microseconds", duration.count());
+        LOGE("Timing attack detected: %lld microseconds", duration.count());
         return true;
     }
     
@@ -774,7 +777,7 @@ Java_org_mazhai_aran_security_SecurityHardening_nativeValidateMethodIntegrity(JN
     bool valid = (currentChecksum == expectedChecksum);
     
     if (!valid) {
-        LOGE("Method integrity check FAILED for %s: expected %lld, got %lld", method_name, expectedChecksum, currentChecksum);
+        LOGE("Method integrity check FAILED for %s: expected %" PRId64 ", got %" PRId64, method_name, (int64_t)expectedChecksum, (int64_t)currentChecksum);
     } else {
         LOGI("Method integrity check PASSED for %s", method_name);
     }

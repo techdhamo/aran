@@ -313,8 +313,12 @@ build_aar() {
     log_info "Building AAR with Gradle..."
     log_info "Build type: $BUILD_TYPE"
     
-    # Use Java 17 for Gradle compatibility (Java 25 not supported by Gradle 8.6)
-    export JAVA_HOME="${JAVA_HOME:-$(/usr/libexec/java_home -v 17 2>/dev/null)}"
+    # Force Java 17 for Gradle compatibility (Java 25 not supported by Gradle 8.6)
+    export JAVA_HOME="/Users/dhamo/.sdkman/candidates/java/17.0.12-tem"
+    if [ ! -d "$JAVA_HOME" ]; then
+        log_warn "Java 17 not found at $JAVA_HOME, trying /usr/libexec/java_home"
+        export JAVA_HOME="$(/usr/libexec/java_home -v 17 2>/dev/null)"
+    fi
     if [ -z "$JAVA_HOME" ]; then
         log_warn "Java 17 not found, using system default"
     else
