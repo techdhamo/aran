@@ -1,0 +1,7 @@
+{
+	"InstallScripts" : 
+	[
+		"/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/src/main/cpp/build-ollvm/armeabi-v7a/cmake_install.cmake"
+	],
+	"Parallel" : false
+}

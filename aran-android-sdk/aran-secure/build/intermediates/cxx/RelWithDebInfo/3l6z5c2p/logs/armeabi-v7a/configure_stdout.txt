@@ -1,3 +1,0 @@
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/RelWithDebInfo/3l6z5c2p/armeabi-v7a

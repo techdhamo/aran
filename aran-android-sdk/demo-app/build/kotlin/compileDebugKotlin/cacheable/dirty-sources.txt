@@ -1,1 +1,0 @@
-/Users/dhamo/lab/aran/aran-android-sdk/demo-app/src/main/kotlin/org/mazhai/aran/demo/MainActivity.kt

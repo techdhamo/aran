@@ -5,5 +5,10 @@
 .idea/
 .vscode/
 *.iml
+**/node_modules/
+**/build/
+**/.gradle/
+**/dist/
+demos/
 
 mazhai-central/src/main/java/in/

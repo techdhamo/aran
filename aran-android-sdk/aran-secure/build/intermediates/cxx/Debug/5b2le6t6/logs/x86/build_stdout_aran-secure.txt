@@ -1,3 +1,0 @@
-ninja: Entering directory `/Users/dhamo/lab/aran/aran-android-sdk/aran-secure/.cxx/Debug/5b2le6t6/x86'
-[1/2] Building CXX object CMakeFiles/aran-secure.dir/aran-core.cpp.o
-[2/2] Linking CXX shared library /Users/dhamo/lab/aran/aran-android-sdk/aran-secure/build/intermediates/cxx/Debug/5b2le6t6/obj/x86/libaran-secure.so
