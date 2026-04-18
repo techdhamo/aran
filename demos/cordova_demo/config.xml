@@ -14,7 +14,7 @@
     
     <platform name="android">
         <preference name="android-minSdkVersion" value="21" />
-        <preference name="android-targetSdkVersion" value="34" />
+        <preference name="android-targetSdkVersion" value="36" />
     </platform>
     
     <platform name="ios">
@@ -22,5 +22,5 @@
     </platform>
     
     <!-- ARAN RASP Plugin -->
-    <plugin name="cordova-rasp" spec="../../plugins/cordova_capacitor/cordova" />
+    <plugin name="cordova-plugin-aran-rasp" spec="../../plugins/cordova-plugin-aran-rasp" />
 </widget>
