@@ -20,8 +20,8 @@ repositories {
     maven {
         url 'https://maven.mazhai.org/nexus/repository/aran-demobank/'
         credentials {
-            username 'aran-demobank'
-            password 'Demo@123'
+            username 'admin'
+            password 'DS@n#2k22'
         }
         metadataSources {
             artifact()
