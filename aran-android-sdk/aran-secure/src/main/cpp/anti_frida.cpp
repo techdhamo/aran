@@ -774,7 +774,7 @@ Java_org_mazhai_aran_security_SecurityHardening_nativeValidateMethodIntegrity(JN
     bool valid = (currentChecksum == expectedChecksum);
     
     if (!valid) {
-        LOGE("Method integrity check FAILED for %s: expected %ld, got %ld", method_name, expectedChecksum, currentChecksum);
+        LOGE("Method integrity check FAILED for %s: expected %lld, got %lld", method_name, expectedChecksum, currentChecksum);
     } else {
         LOGI("Method integrity check PASSED for %s", method_name);
     }

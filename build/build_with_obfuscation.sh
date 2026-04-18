@@ -311,14 +311,29 @@ build_native_ollvm() {
 
 build_aar() {
     log_info "Building AAR with Gradle..."
+    log_info "Build type: $BUILD_TYPE"
+    
+    # Use Java 17 for Gradle compatibility (Java 25 not supported by Gradle 8.6)
+    export JAVA_HOME="${JAVA_HOME:-$(/usr/libexec/java_home -v 17 2>/dev/null)}"
+    if [ -z "$JAVA_HOME" ]; then
+        log_warn "Java 17 not found, using system default"
+    else
+        log_info "Using Java: $JAVA_HOME"
+    fi
     
     cd "$PROJECT_ROOT/aran-android-sdk"
     
-    # Build the AAR
-    ./gradlew :aran-secure:assembleRelease \
-        -Paran.obfuscation=ollvm \
-        --stacktrace \
-        --info 2>&1 | tee "build-aar.log"
+    if [ "$BUILD_TYPE" = "release" ]; then
+        ./gradlew :aran-secure:assembleRelease \
+            -Paran.obfuscation=ollvm \
+            --stacktrace \
+            --info 2>&1 | tee "build-aar.log"
+    else
+        ./gradlew :aran-secure:assembleDebug \
+            -Paran.obfuscation=ollvm \
+            --stacktrace \
+            --info 2>&1 | tee "build-aar.log"
+    fi
     
     if [ $? -ne 0 ]; then
         log_error "AAR build failed"
