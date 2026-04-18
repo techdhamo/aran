@@ -16,6 +16,9 @@
 #include <inttypes.h>
 #include <sys/syscall.h>
 #include <sys/prctl.h>
+#include <dirent.h>
+#include <fstream>
+#include <sys/ptrace.h>
 
 #define LOG_TAG "AranAntiFrida"
 #define LOGI(...) __android_log_print(ANDROID_LOG_INFO, LOG_TAG, __VA_ARGS__)
