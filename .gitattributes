@@ -1,0 +1,26 @@
+# Exclude build artifacts, generated code, and third-party bundles
+# from GitHub's language detection and diff view.
+
+# Gradle caches & outputs
+**/.gradle/** linguist-vendored
+**/.gradle/** linguist-generated
+**/build/** linguist-generated
+**/.idea/** linguist-vendored
+
+# CMake / NDK build artifacts
+**/.cxx/** linguist-generated
+**/cmake-build-*/** linguist-generated
+**/CMakeFiles/** linguist-generated
+
+# iOS derived data
+**/DerivedData/** linguist-generated
+**/Pods/** linguist-vendored
+
+# Node / JS
+**/node_modules/** linguist-vendored
+**/dist/** linguist-generated
+**/coverage/** linguist-generated
+
+# Docs
+docs/** linguist-documentation
+*.md linguist-documentation=false
